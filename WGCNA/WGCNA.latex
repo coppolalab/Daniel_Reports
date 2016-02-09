@@ -1,0 +1,233 @@
+\documentclass{beamer}
+\usefonttheme{professionalfonts}
+\usepackage{fontspec}
+\setsansfont{Oxygen-Regular}
+\usepackage{grffile}
+\usepackage{graphicx}
+\usepackage{smartdiagram}
+\setbeamertemplate{blocks}[rounded]
+\mode<presentation>
+
+\title{FRDA Biomarker Study - WGCNA}
+\author{Daniel Nachun}
+
+\begin{document}
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA Analysis Workflow}
+    \begin{block}{}
+    \begin{center}
+        \centerline{
+            \smartdiagramset{font = \tiny, back arrow disabled=true, module minimum height = 0.4cm, module minimum width = 6cm, module y sep = 1.1, text width = 5.75cm}
+            \smartdiagram[flow diagram:vertical]{Calculate adjacency using Pearson's correlation, Convert adjacency to Topological Overlap Matrix, Cluster genes using average linked hierarchical clustering, Create modules using dynamic tree cutting, Calculate eigengene for each module, Correlate eigengenes with phenotypical traits}
+        }
+    \end{center}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA Cluster Dendrogram}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.95\paperwidth]{../../FRDA project/WGCNA/module_eigengene_clustering_min50.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA Module Cluster Dendrogram}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.95\paperwidth]{../../FRDA project/WGCNA/eigengenes.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA Module-Trait Heatmap}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.95\paperheight]{../../FRDA project/WGCNA/module-trait relationships.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{PEER Factor-Trait Heatmap}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.95\paperheight]{../../FRDA project/WGCNA/PEER factor-trait relationships.pdf}}
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{WGCNA Module-PEER Factor Heatmap}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.95\paperheight]{../../FRDA project/WGCNA/module-PEER factor relationships.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Eigengene-Patient-Control correlation (p < 0.05)}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.85\paperwidth]{../../FRDA project/WGCNA/Control_Patient_eigengenes_05.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Eigengene-Patient-Carrier correlation (p < 0.05)}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.85\paperwidth]{../../FRDA project/WGCNA/Carrier_Patient_eigengenes_05.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Green Yellow Module}
+    \vspace{0.1cm}
+    \centerline{GO Biological Process}
+    \vspace{-0.2cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../FRDA project/WGCNA/greenyellow/GO_Biological_Process_2015.pdf}}
+    \end{figure}
+    \vspace{-0.4cm}
+    \centerline{KEGG}
+    \vspace{-0.1cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../FRDA project/WGCNA/greenyellow/KEGG_2015.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Green Yellow Module}
+    \vspace{0.1cm}
+    \centerline{Reactome}
+    \vspace{-0.2cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../FRDA project/WGCNA/greenyellow/Reactome_2015.pdf}}
+    \end{figure}
+    \vspace{-0.4cm}
+    \centerline{Panther}
+    \vspace{-0.1cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../FRDA project/WGCNA/greenyellow/Panther.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Green Yellow Module}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/WGCNA/stringdb/greenyellow.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Light Green Module}
+    \vspace{0.1cm}
+    \centerline{GO Biological Process}
+    \vspace{-0.2cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../FRDA project/WGCNA/lightgreen/GO_Biological_Process_2015.pdf}}
+    \end{figure}
+    \vspace{-0.4cm}
+    \centerline{KEGG}
+    \vspace{-0.1cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../FRDA project/WGCNA/lightgreen/KEGG_2015.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Light Green Module}
+    \vspace{0.1cm}
+    \centerline{Reactome}
+    \vspace{-0.2cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../FRDA project/WGCNA/lightgreen/Reactome_2015.pdf}}
+    \end{figure}
+    \vspace{-0.4cm}
+    \centerline{Panther}
+    \vspace{-0.1cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../FRDA project/WGCNA/lightgreen/Panther.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Light Green Module}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/WGCNA/stringdb/lightgreen.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA (Patient Only) Cluster Dendrogram}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.95\paperwidth]{../../FRDA project/WGCNA_GAA/4-module_eigengene_clustering_min50.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA (Patient Only) Module Cluster Dendrogram}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.95\paperwidth]{../../FRDA project/WGCNA_GAA/5-eigengenes.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA (Patient Only) Module-Trait Heatmap}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/WGCNA_GAA/module-trait relationships.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{PEER (Patient Only) Weights}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.85\paperwidth]{../../FRDA project/WGCNA_GAA/PEER_weights.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA (Patient Only) Module-PEER Factor Heatmap}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/WGCNA_GAA/module-PEER factor relationships.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Eigengene-GAA correlation (p < 0.05)}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.85\paperwidth]{../../FRDA project/WGCNA_GAA/GAA1_eigengenes_05.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Green Module Protein-Protein Network}
+    \vspace{-0.4cm}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/WGCNA_GAA/stringdb/green.pdf}}
+    \end{figure} 
+\end{frame}
+
+\end{document}

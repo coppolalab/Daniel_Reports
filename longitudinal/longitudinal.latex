@@ -1,0 +1,149 @@
+\documentclass{beamer}
+\usefonttheme{professionalfonts}
+\usepackage{fontspec}
+\setsansfont{Oxygen-Regular}
+\usepackage{grffile}
+\usepackage{graphicx}
+\usepackage{smartdiagram}
+\setbeamertemplate{blocks}[rounded]
+\mode<presentation>
+
+\title{FRDA Biomarker Study - WGCNA}
+\author{Daniel Nachun}
+
+\begin{document}
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}
+    \frametitle{ICA Module 1}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/ica/stringdb/means/Patient/X1.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{ICA Module 2}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/ica/stringdb/means/Patient/X2.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{ICA Module 3}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/ica/stringdb/means/Patient/X3.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{ICA Module 4}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/ica/stringdb/means/Patient/X4.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{DTW Patient vs. Carrier}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/dtw/pca/pca.mean.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{DTW Patient vs. Control}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/dtw/pco/pco.mean.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{DTW Carrier vs. Control}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/dtw/cc/cc.mean.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{MI Analysis Workflow}
+    \begin{block}{}
+    \begin{center}
+        \centerline{
+            \smartdiagramset{font = \tiny, back arrow disabled=true, module minimum height = 0.4cm, module minimum width = 6cm, module y sep = 1.1, text width = 5.75cm}
+            \smartdiagram[flow diagram:vertical]{Equal width binning of data, Calculate adjacency using mutual information with James-Stein shrinkage estimator, Convert adjacency to Topological Overlap Matrix, Cluster genes using average linked hierarchical clustering, Create modules using dynamic tree cutting, Calculate eigengene for each module}
+        }
+    \end{center}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA Cluster Dendrogram}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.95\paperwidth]{../../FRDA project/longnet/module_eigengene_clustering_min50_Patient.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Brown Module}
+    \vspace{0.1cm}
+    \centerline{GO Biological Process}
+    \vspace{-0.2cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../FRDA project/longnet/brown/GO_Biological_Process_2015.pdf}}
+    \end{figure}
+    \vspace{-0.4cm}
+    \centerline{GO Molecular Process}
+    \vspace{-0.1cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../FRDA project/longnet/brown/GO_Molecular_Function_2015.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Brown Module}
+    \vspace{0.1cm}
+    \centerline{KEGG}
+    \vspace{-0.2cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../FRDA project/longnet/brown/KEGG_2015.pdf}}
+    \end{figure}
+    \vspace{-0.4cm}
+    \centerline{Reactome}
+    \vspace{-0.1cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../FRDA project/longnet/brown/Reactome_2015.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Brown Module}
+    \vspace{0.1cm}
+    \centerline{WikiPathways}
+    \vspace{-0.2cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../FRDA project/longnet/brown/WikiPathways_2015.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Brown Module}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/longnet/brown.pdf}}
+    \end{figure}
+\end{frame}
+\end{document}

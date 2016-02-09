@@ -1,0 +1,340 @@
+\documentclass{beamer}
+\usefonttheme{professionalfonts}
+\usepackage{fontspec}
+\setsansfont{Oxygen-Regular}
+\usepackage{graphicx}
+\setbeamertemplate{blocks}[rounded]
+\mode<presentation>
+
+\title{Journal Club}
+\author{Daniel Nachun}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}
+    \frametitle{Inflammation and Neurodegeneration}
+    Neurodegeneration and inflammation have previously been linked\\
+    \vspace{\baselineskip}
+    IL-1\(\beta\) has been linked \(\alpha\)-synuclein aggregation in AD (Mrak 2007 )\\
+    \vspace{\baselineskip}
+    TNF-\(\beta\) has also been linked to neurodegeneration in PD (Tansey 2008)\\
+    \vspace{\baselineskip}
+    IFN-\(\beta\) has successfully been used as a treatment for multiple sclerosis\\
+    \vspace{\baselineskip}
+    Despite these findings, defects in neuroinflammation genes have not yet been linked directly to neurodegeneration
+\end{frame}
+
+\begin{frame}
+    \frametitle{Interferon \(\beta\) (Ifnb) Knockout}
+     Most experiments use a systemic KO\\
+     \vspace{\baselineskip}
+     A small subset used a floxed version of Ifnb with nestin-cre driver (for CNS specificity)\\
+     \vspace{\baselineskip}
+     Another small subset used a systemic KO of the Interferon-\(\alpha\)/\(\beta\) receptor
+\end{frame}
+
+\begin{frame}
+    \frametitle{Behavioral Characterization}
+    \begin{figure}
+    \centerline{
+        \includegraphics[width = 0.85\paperwidth]{fig1.jpeg}}
+    \end{figure}
+    \vspace{-1cm}
+    \begin{figure}
+    \centerline{
+        \includegraphics[width = 0.55\paperwidth]{fig3.jpeg}
+        \hspace{0.5cm}
+        \includegraphics[width = 0.3\paperwidth]{fig2.jpeg}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Gross Anatomy} 
+    \begin{figure}
+    \centerline{
+        \includegraphics[width = 0.8\paperwidth]{fig4.jpeg}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Apoptosis} %Mix
+    \begin{figure}
+    \centerline{
+        \includegraphics[width = 0.485\paperwidth]{fig5.jpeg}
+        }
+    \end{figure}
+    \vspace{-1.40cm}
+    \begin{figure}
+    \centerline{
+        \includegraphics[width = 0.65\paperheight]{fig6.jpeg}
+    }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Reversing Apoptosis}
+    \begin{figure}
+    \centerline{
+        \includegraphics[width = 0.65\paperwidth]{fig9.jpeg}
+        }
+    \end{figure}
+\end{frame}
+    
+\begin{frame} 
+    \frametitle{Neuron Morphology} %In vivo
+    \begin{figure}
+    \centerline{
+        \includegraphics[height = 0.75\paperheight]{fig7.jpeg}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame} 
+    \frametitle{Neuron Morphology} %Primary cortical
+    \begin{figure}
+    \centerline{
+        \includegraphics[height = 0.75\paperheight]{fig8.jpeg}
+    }
+    \end{figure}
+\end{frame}
+
+\begin{frame} 
+    \frametitle{Neuron Morphology} %Primary cortical and CGN
+    \begin{figure}
+    \centerline{
+        \includegraphics[width = 0.75\paperwidth]{fig10.jpeg}
+    }
+    \end{figure}
+    \vspace{-1cm}
+    \begin{figure}
+    \centerline{
+        \includegraphics[width = 0.75\paperwidth]{fig11.jpeg}
+    }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Gene Expression} %CGN
+    \begin{figure}
+    \centerline{
+        \includegraphics[width = 0.85\paperwidth]{fig12.jpeg}
+    }
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Pathway Analysis}
+    \begin{figure}
+    \centerline{
+        \includegraphics[width = 0.475\paperwidth]{fig13.jpeg}
+        \hspace{0.18cm}
+        \includegraphics[width = 0.475\paperwidth]{fig14.jpeg}
+    }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Comparison to other diseases}
+    \begin{figure}
+    \centerline{
+        \includegraphics[height = 0.7\paperheight]{fig16.jpeg}
+    }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Comparison to other diseases} %CGN
+    \begin{figure}
+    \centerline{
+        \includegraphics[width = 0.485\paperwidth]{fig32.jpeg}
+        \includegraphics[width = 0.485\paperwidth]{fig33.jpeg}
+    }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Neurogenesis}
+    \begin{figure}
+    \centerline{
+        \includegraphics[width = 0.6\paperwidth]{fig15.jpeg}
+    }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Dopaminergic Pathway}
+    \begin{figure}
+    \centerline{
+        \includegraphics[width = 0.90\paperwidth]{fig18.jpeg}
+    }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Dopaminergic Deficits}
+    \begin{figure}
+    \centerline{
+        \includegraphics[width = 0.85\paperwidth]{fig17.jpeg}
+    }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Dopaminergic Deficits}
+    \begin{figure}
+    \centerline{
+        \includegraphics[height = 0.7\paperheight]{fig19.jpeg}
+    }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\(\alpha\)-Synuclein in TH Neurons}
+    \begin{figure}
+    \centerline{
+        \includegraphics[width = 0.95\paperwidth]{fig20.jpeg}
+    }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\(\alpha\)-Synuclein Aggregates}
+    \begin{figure}
+    \centerline{
+        \includegraphics[width = 0.90\paperwidth]{fig21.jpeg}
+    }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Ubiquitin and Tau}
+    \begin{figure}
+    \centerline{
+        \includegraphics[width = 0.90\paperwidth]{fig22.jpeg}
+    }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{CNS-specific Ifnb KO}
+    \begin{figure}
+    \centerline{
+        \includegraphics[width = 0.85\paperwidth]{fig23.jpeg}
+    }
+    \end{figure}
+    \vspace{-1.0cm}
+    \begin{figure}
+    \centerline{
+        \includegraphics[width = 0.85\paperwidth]{fig24.jpeg}
+    }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Autophagy Genes}
+    \begin{figure}
+    \centerline{
+        \includegraphics[width = 0.75\paperwidth]{fig25.jpeg}
+    }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Autophagy Proteins}
+    \begin{figure}
+    \centerline{
+        \includegraphics[width = 0.90\paperwidth]{fig26.jpeg}
+    }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Mitochondrial Buildup}
+    \begin{figure}
+    \centerline{
+        \includegraphics[height = 0.80\paperheight]{fig27.jpeg}
+    }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Reversal of Autophagy Deficits}
+    \begin{figure}
+    \centerline{
+        \includegraphics[width = 0.75\paperwidth]{fig28.jpeg}
+    }
+    \end{figure}
+    \vspace{-1.0cm}
+    \begin{figure}
+    \centerline{
+        \includegraphics[width = 0.75\paperwidth]{fig29.jpeg}
+    }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Reversal of Dopaminergic Loss}
+    \begin{figure}
+    \centerline{
+        \includegraphics[width = 0.75\paperwidth]{fig30.jpeg}
+    }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Reversal of \(\alpha\)-Synuclein Aggregation}
+    \begin{figure}
+    \centerline{
+        \includegraphics[width = 0.85\paperwidth]{fig31.jpeg}
+    }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Summary Figure}
+    \begin{figure}
+    \centerline{
+        \includegraphics[height = 0.80\paperheight]{fig34.jpeg}
+    }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Conclusions}
+    1. Loss of the IFN-\(\beta\)-IFNAR signalling pathway leads to production of Lewy Bodies, in the absence of any other mutations or overexpression\\
+    \vspace{\baselineskip}
+    2. IFN-\(\beta\) deficiency impairs autophagy, eventually leading to \(\alpha\)-synuclein aggregation\\
+    \vspace{\baselineskip}
+    3. IFN-\(\beta\) signalling normally acts to promote autophagy in neurons, clearing \(\alpha\)-synuclein\\
+    \vspace{\baselineskip}
+    4. Ifnb gene therapy appears to prevent much of the neurodegeneration associated with a familial PD model
+\end{frame}
+
+\begin{frame}
+    \frametitle{A Possible Treatment?}
+    \begin{figure}
+    \centerline{
+        \includegraphics[width=0.90\paperwidth]{fig35.jpeg}
+    }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Questions}
+    1. What happens to microglia?\\
+    \vspace{\baselineskip}
+    2. Can this be studied in human-derived iPS cells?\\
+    \vspace{\baselineskip}
+    3. Given the high expression of these genes in peripheral blood, can we still study the relationship between their expression and neurodegeneration in human peripheral blood data?\\
+    \vspace{\baselineskip}
+    4. Will we eventually find evidence of variants (common or rare) in inflammatory genes which confer risk or protection from neurodegeneration?
+\end{frame}
+
+\end{document}

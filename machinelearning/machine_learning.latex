@@ -1,0 +1,213 @@
+\documentclass{beamer}
+\usefonttheme{professionalfonts}
+\usepackage{fontspec}
+\setsansfont{Oxygen-Regular}
+\usepackage{grffile}
+\usepackage{graphicx}
+\usepackage{smartdiagram}
+\usesmartdiagramlibrary{additions}
+\setbeamertemplate{blocks}[rounded]
+\mode<presentation>
+
+\RenewDocumentCommand{\smartdiagramconnect}{m m}{
+  \begin{tikzpicture}[remember picture,overlay]
+  \foreach \start/\end in {#2}
+  \draw[additional item arrow type,#1]
+    (\start) to (\end);
+  \end{tikzpicture}
+}
+
+\title{FRDA Biomarker Study - Machine Learning}
+\author{Daniel Nachun}
+
+\begin{document}
+\begin{frame}
+    \titlepage
+\end{frame}
+\begin{frame}
+    \frametitle{Comparison of machine learning methods for Patient vs. Carrier}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.8\paperwidth]{../../FRDA project/classification/pca.accuracies.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Comparison of machine learning methods for Patient vs. Control}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.8\paperwidth]{../../FRDA project/classification/pco.accuracies.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Comparison of machine learning methods for Carrier vs. Control}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.8\paperwidth]{../../FRDA project/classification/cc.accuracies.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{SVM-RFE }
+    \begin{block}{}
+    \begin{center}
+        \centerline{
+            \smartdiagramset{font = \small, back arrow disabled=true, module minimum width = 6cm, text width = 5.75cm, module y sep = 1.6, additions={additional arrow tip=stealth, additional arrow line width = 3pt, additional arrow color=violet!50}}
+            \smartdiagramadd[flow diagram:vertical]{Calculate initial importance ranking, Remove bottom 20\% of genes, Recalculate importance ranking until < 100 genes remain, Aggregate rankings}{}
+            \smartdiagramconnect{->, bend left = 90}{module3/module2}
+        }
+    \end{center}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{SVM-RFE}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.8\paperwidth]{../../FRDA project/classification/svm.rfe.accuracies.pdf}}
+    \end{figure}
+    
+\end{frame}    
+
+\begin{frame}
+    \frametitle{Top 500 SVM-RFE Genes (Patient vs. Carrier)}
+    \vspace{0.1cm}
+    \centerline{Panther}
+    \vspace{-0.2cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../FRDA project/classification/pca/Panther.pdf}}
+    \end{figure}
+    \vspace{-0.4cm}
+    \centerline{BioCarta}
+    \vspace{-0.1cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../FRDA project/classification/pca/BioCarta_2015.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Top 500 SVM-RFE Genes (Patient vs. Carrier)}
+    \vspace{0.1cm}
+    \centerline{WikiPathways}
+    \vspace{-0.2cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../FRDA project/classification/pca/WikiPathways_2015.pdf}}
+    \end{figure}
+    \vspace{-0.4cm}
+    \centerline{Reactome}
+    \vspace{-0.1cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../FRDA project/classification/pca/Reactome_2015.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Top 500 SVM-RFE Genes (Patient vs. Carrier)}
+    \begin{figure}
+        \centering{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/classification/pca/svm.pca.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Top 500 SVM-RFE Genes (Patient vs. Control)}
+    \vspace{0.1cm}
+    \centerline{BioCarta}
+    \vspace{-0.2cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../FRDA project/classification/pco/BioCarta_2015.pdf}}
+    \end{figure}
+    \vspace{-0.4cm}
+    \centerline{KEGG}
+    \vspace{-0.1cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../FRDA project/classification/pco/KEGG_2015.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Top 500 SVM-RFE Genes (Patient vs. Control)}
+    \vspace{0.1cm}
+    \centerline{Panther}
+    \vspace{-0.2cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../FRDA project/classification/pco/Panther.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Top 500 SVM-RFE Genes (Patient vs. Control)}
+    \begin{figure}
+        \centering{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/classification/pco/svm.pco.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Top 500 SVM-RFE Genes (Carrier vs. Control)}
+    \vspace{0.1cm}
+    \centerline{GO Molecular Function}
+    \vspace{-0.2cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../FRDA project/classification/cc/GO_Molecular_Function_2015.pdf}}
+    \end{figure}
+    \vspace{-0.4cm}
+    \centerline{KEGG}
+    \vspace{-0.1cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../FRDA project/classification/cc/KEGG_2015.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Top 500 SVM-RFE Genes (Carrier vs. Control)}
+    \vspace{0.1cm}
+    \centerline{BioCarta}
+    \vspace{-0.2cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../FRDA project/classification/cc/BioCarta_2015.pdf}}
+    \end{figure}
+    \vspace{-0.4cm}
+    \centerline{Reactome}
+    \vspace{-0.1cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../FRDA project/classification/cc/Reactome_2015.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Top 500 SVM-RFE Genes (Carrier vs. Control)}
+    \begin{figure}
+        \centering{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/classification/cc/svm.cc.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Comparison of machine learning methods for GAA prediction}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.8\paperwidth]{../../FRDA project/GAA_classification/mses.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Top SVM-RFE Genes for GAA prediction}
+    \begin{figure}
+        \centering{
+        \includegraphics[height=0.8\paperheight]{../../FRDA project/GAA_classification/svm.gaa.pdf}}
+    \end{figure}
+\end{frame}
+\end{document}

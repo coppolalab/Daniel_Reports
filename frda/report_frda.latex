@@ -1,0 +1,382 @@
+\documentclass{beamer}
+\usefonttheme{professionalfonts}
+\usepackage{fontspec}
+\setsansfont{Oxygen-Regular}
+\usepackage{pgfplotstable, pgfplots, grffile}
+\usepackage{booktabs, colortbl, array, graphicx}
+\usepackage{smartdiagram}
+\pgfplotsset{compat=newest}
+\setbeamertemplate{blocks}[rounded]
+\mode<presentation>
+\newcolumntype{C}{>{\centering\arraybackslash}m{6em}}
+\newcolumntype{D}{>{\centering\arraybackslash}m{8em}}
+
+\makeatletter
+\newcommand{\thickhline}{%
+    \noalign {\ifnum 0=`}\fi \hrule height 1pt
+    \futurelet \reserved@a \@xhline
+}
+\newcolumntype{E}{@{\vrule width 1pt\hspace{\tabcolsep}}}
+\newcolumntype{F}{@{\hspace{\tabcolsep}\vrule width 1pt\hspace{\tabcolsep}}}
+\newcolumntype{G}{@{\hspace{\tabcolsep}\vrule width 1pt}}
+\makeatother
+
+
+\title{FRDA Biomarker Study Update }
+\author{Daniel Nachun}
+
+\begin{document}
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}
+    \frametitle{Summary}
+    \textbf{Samples}\\
+    18 batches, 1179 samples\\
+    Illumina Human HT-12 v4 Platform\\
+    \vspace{\baselineskip}
+    \textbf{Analysis}\\
+    Baseline:\\
+     samples, excluding 1 outlier, 4 replicates, and 4 patients with ambiguous FA status\\
+    \vspace{\baselineskip}
+    All time points:\\
+    1179 samples, excluding same samples plus two more outliers\\
+    \vspace{\baselineskip}
+    \textbf{Comparisons}\\
+    Carriers vs. Controls\\
+    Patients vs. Controls\\
+    Patients vs. Carriers\\
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sample Sizes}
+    \begin{block}{}
+    \renewcommand{\arraystretch}{1.3}
+    \fontsize{7}{8.5}\selectfont    
+    \setlength{\tabcolsep}{2pt}
+    \begin{center}
+        \centerline{
+        \pgfplotstabletypeset[
+        col sep=comma, 
+        string type, 
+        ignore chars={"}, 
+        every even row/.style={before row={\rowcolor{lightgray}}},
+        every first column/.style={column type=EcF},
+        every last column/.style={column type=FcG},
+        display columns/4/.style={column type=D},
+        display columns/5/.style={column type=C},
+        display columns/6/.style={column type=C},
+        display columns/7/.style={column type=CG},
+        every head row/.style={before row=\thickhline, after row=\thickhline},
+        every last row/.style={before row=\thickhline, after row=\thickhline}
+        ]
+        {patient_table.csv}}
+    \end{center}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Longitudinal Samples}
+    \begin{block}{}
+    \renewcommand{\arraystretch}{1.6}
+    \fontsize{10}{11.5}\selectfont
+    \setlength{\tabcolsep}{2pt}
+    \begin{center}
+        \extracolsep{\fill}
+        \centerline{
+        \pgfplotstabletypeset[
+        col sep=comma, 
+        string type, 
+        ignore chars={"}, 
+        every even row/.style={before row={\rowcolor{lightgray}}},
+        every head row/.style={before row=\thickhline, after row=\thickhline},
+        every last row/.style={before row=\thickhline, after row=\thickhline},
+        every first column/.style={column type=EcF},
+        every last column/.style={column type=FcG}
+        ]
+        {longitudinal_table.csv}}
+    \end{center}
+\end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Baseline Analysis Workflow}
+    \begin{block}{}
+    \begin{center}
+        \centerline{
+            \smartdiagramset{font = \small, back arrow disabled=true, module minimum width = 4cm, text width = 3.75cm, module y sep = 1.6}
+            \smartdiagram[flow diagram:vertical]{VST normalization, Remove outliers and replicates, Batch correction with ComBat, Remove hidden factors with PEER, Empirical Bayesian linear modelling}
+        }
+    \end{center}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Data Quality}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.95\paperwidth]{../../FRDA project/baseline_lumi/baseline_intensity_notnorm.jpg}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sample Clustering}
+    \begin{figure}
+        \centerline{
+            \includegraphics[width=0.475\paperwidth]{../../FRDA project/baseline_lumi/rmreps_mds_batch.pdf}
+            \includegraphics[width=0.475\paperwidth]{../../FRDA project/baseline_lumi/rmreps_mds_diagnosis.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Batch Effect Correction with ComBat}
+    \begin{figure}
+        \centerline{
+            \includegraphics[width=0.475\paperwidth]{../../FRDA project/baseline_lumi/combat_mds_batch.pdf}
+            \includegraphics[width=0.475\paperwidth]{../../FRDA project/baseline_lumi/combat_mds_diagnosis.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Batch Effect Correction with ComBat}
+    Batch effect is result of variable conditions and handling of samples during individual microarray runs\\
+    \vspace{\baselineskip}
+    ComBat from sva package was created to remove this effect\\
+    \begin{itemize}
+    \item Uses parametric Empirical Bayesian model:\\
+    \centerline{\(Y_{ijg} = \alpha_g + X\beta_g + \gamma_{ig} + \delta_{ig}\epsilon_{ijg}\)}
+    \item Requires that batches be known in advance\\
+    \item Other covariates to be preserved (i.e. age, sex) must be provided\\
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sample Clustering Heatmap}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.87\paperheight]{../../FRDA project/baseline_lumi/combat_heatmap.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Probabilistic Evaluation of Expression Residuals}
+    \vspace{-.5cm}
+    \begin{figure}
+    \centerline{\includegraphics[width=0.95\paperwidth]{./PEER.png}}
+    \end{figure}
+    \vspace{-.75cm}
+    Used to calculate hidden factors which add noise to data
+    \begin{itemize}
+        \item Number of factors must be specified in advance
+        \item Any covariates you wish to study later must also be provided
+        \item Missing values NOT allowed - this is why patients with missing data must be dropped
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{PEER Weights}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.85\paperwidth]{../../FRDA project/baseline_lumi/PEER_weights.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{PEER Factor-Trait Heatmap}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.95\paperheight]{../../FRDA project/baseline_lumi/PEER factor-trait relationships.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Empirical Bayesian Linear Modeling}
+    Used to test difference in gene expression between groups\\
+    One linear model per gene: \(E(\mathbf{y}_g) = X\pmb{\alpha}_g\)\\
+    False discovery rate is optionally used for multiple comparisons correction\\
+    \vspace{\baselineskip}
+    We are interested in coefficents from contrast matrix: \(\pmb{\beta}_g = C^T\pmb(\alpha)_g\)
+    \begin{itemize}
+        \item Our contrasts: Patient - Carrier, Patient - Control, Carrier - Control
+        \item Age, sex, and PEER factors included as additional covariates
+        \item Small number of controls means comparisons with them have less statistical power
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Threshold Selection}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/threshold_selection.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Selected Threshold w/o FDR}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/selected_threshold.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Selected Threshold w/ FDR}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/selected_threshold_fdr.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Differential Expression Venn Diagram w/o FDR}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/venn.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Differential Expression Venn Diagram w/ FDR}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/venn_fdr.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Patient vs. Control Heatmap w/o FDR}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/anova_heatmap_patient_vs_control_none.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Patient vs. Carrier Heatmap w/o FDR}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/anova_heatmap_patient_vs_carrier_none.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Control vs. Carrier Heatmap w/o FDR}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/anova_heatmap_carrier_vs_control_none.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Patient vs. Control Heatmap w/ FDR}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/anova_heatmap_patient_vs_control_fdr.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Patient vs. Carrier Heatmap w/ FDR}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/anova_heatmap_patient_vs_carrier_fdr.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Control vs. Carrier Heatmap w/ FDR}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/anova_heatmap_carrier_vs_control_fdr.pdf}}
+    \end{figure}
+\end{frame}
+
+%\begin{frame}
+    %\frametitle{Top 30 Differentially Expressed Genes}
+    %\vspace{-0.3cm}
+    %\begin{figure}
+        %\centerline{
+        %\includegraphics[width=\paperwidth]{../../FRDA project/baseline_lumi/significant_geneList_fdrLess01_time1.pdf}}
+    %\end{figure}
+%\end{frame}
+
+%\begin{frame}
+    %\frametitle{Patient vs. Carrier}
+    %\vspace{-0.3cm}
+    %\begin{figure}
+        %\centerline{
+        %\includegraphics[width=\paperwidth]{../../FRDA project/baseline_lumi/significant_geneList_fdrLess01_time1_pca.pdf}}
+    %\end{figure}
+%\end{frame}
+
+%\begin{frame}
+    %\frametitle{Patient vs. Control}
+    %\vspace{-0.3cm}
+    %\begin{figure}
+        %\centerline{
+        %\includegraphics[width=\paperwidth]{../../FRDA project/baseline_lumi/significant_geneList_fdrLess01_time1_pco.pdf}}
+    %\end{figure}
+%\end{frame}
+
+%\begin{frame}
+    %\frametitle{Carrier vs. Control}
+    %\vspace{-0.3cm}
+    %\begin{figure}
+        %\centerline{
+        %\includegraphics[width=\paperwidth]{../../FRDA project/baseline_lumi/significant_geneList_fdrLess01_time1_cc.pdf}}
+    %\end{figure}
+%\end{frame}
+
+%\begin{frame}
+    %\frametitle{PCA of Patient vs. Carrier FDR p < 0.1}
+    %\begin{figure}
+    %\centerline{ 
+    %\includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/subgroup_pca_patient_vs_carrier_fdr.pdf}}
+    %\end{figure}
+%\end{frame}
+
+%\begin{frame}
+    %\frametitle{PCA of Patient vs. Control FDR p < 0.1}
+    %\begin{figure}
+    %\centerline{ 
+    %\includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/subgroup_pca_patient_vs_control_fdr.pdf}}
+    %\end{figure}
+%\end{frame}
+
+%\begin{frame}
+    %\frametitle{PCA of Carrier vs. Control FDR p < 0.1}
+    %\begin{figure}
+    %\centerline{ 
+    %\includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/subgroup_pca_carrier_vs_control_fdr.pdf}}
+    %\end{figure}
+%\end{frame}
+
+%\begin{frame}
+    %\frametitle{PCA of Patient vs. Carrier p < 0.005}
+    %\begin{figure}
+    %\centerline{ 
+    %\includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/subgroup_pca_patient_vs_carrier_none.pdf}}
+    %\end{figure}
+%\end{frame}
+
+%\begin{frame}
+    %\frametitle{PCA of Patient vs. Control p < 0.005}
+    %\begin{figure}
+    %\centerline{ 
+    %\includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/subgroup_pca_patient_vs_control_none.pdf}}
+    %\end{figure}
+%\end{frame}
+
+%\begin{frame}
+    %\frametitle{PCA of Carrier vs. Control p < 0.005}
+    %\begin{figure}
+    %\centerline{ 
+    %\includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/subgroup_pca_carrier_vs_control_none.pdf}}
+    %\end{figure}
+%\end{frame}
+
+\end{document}

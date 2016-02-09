@@ -1,0 +1,49 @@
+\documentclass{beamer}
+\usefonttheme{professionalfonts}
+\usepackage{fontspec}
+\setsansfont{Oxygen-Regular}
+%\usepackage{pgfplotstable, pgfplots, grffile}
+%\usepackage{booktabs, colortbl, array, graphicx}
+%\usepackage{smartdiagram}
+%\pgfplotsset{compat=newest}
+\setbeamertemplate{blocks}[rounded]
+\mode<presentation>
+%\newcolumntype{C}{>{\centering\arraybackslash}m{6em}}
+%\newcolumntype{D}{>{\centering\arraybackslash}m{8em}}
+
+%\makeatletter
+%\newcommand{\thickhline}{%
+    %\noalign {\ifnum 0=`}\fi \hrule height 1pt
+    %\futurelet \reserved@a \@xhline
+%}
+%\newcolumntype{E}{@{\vrule width 1pt\hspace{\tabcolsep}}}
+%\newcolumntype{F}{@{\hspace{\tabcolsep}\vrule width 1pt\hspace{\tabcolsep}}}
+%\newcolumntype{G}{@{\hspace{\tabcolsep}\vrule width 1pt}}
+%\makeatother
+
+\title{Dementia Gene Expression Report}
+\author{Daniel Nachun}
+
+\begin{document}
+
+\begin{frame}
+   \titlepage 
+\end{frame}
+
+\begin{frame}
+    \frametitle{Full Dataset}
+    1060 samples downloaded from "Nessie"\\
+    Some batches contain samples from other studies\\
+    Possibly missing 2012-024\\
+    Has arrays from Illumina HT v1-v4\\
+    \vspace{\baselineskip}
+    1848 patients have at least 1 RNA sample in GIFTbase\\
+    Fuying is uploading remaining data\\
+\end{frame}
+
+\begin{frame}
+    \frametitle{Fanny's Dataset}
+    42 samples, 3 batches\\
+    Batches were on "Nessie"
+\end{frame}
+\end{document}
