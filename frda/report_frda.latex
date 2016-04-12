@@ -21,7 +21,6 @@
 \newcolumntype{G}{@{\hspace{\tabcolsep}\vrule width 1pt}}
 \makeatother
 
-
 \title{FRDA Biomarker Study Update }
 \author{Daniel Nachun}
 
@@ -231,27 +230,27 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Differential Expression Venn Diagram w/o FDR}
-    \begin{figure}
-        \centerline{
-        \includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/venn.pdf}}
-    \end{figure}
-\end{frame}
+%\begin{frame}
+    %\frametitle{Differential Expression Venn Diagram w/o FDR}
+    %\begin{figure}
+        %\centerline{
+        %\includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/venn.pdf}}
+    %\end{figure}
+%\end{frame}
 
-\begin{frame}
-    \frametitle{Differential Expression Venn Diagram w/ FDR}
-    \begin{figure}
-        \centerline{
-        \includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/venn_fdr.pdf}}
-    \end{figure}
-\end{frame}
+%\begin{frame}
+    %\frametitle{Differential Expression Venn Diagram w/ FDR}
+    %\begin{figure}
+        %\centerline{
+        %\includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/venn_fdr.pdf}}
+    %\end{figure}
+%\end{frame}
 
 \begin{frame}
     \frametitle{Patient vs. Control Heatmap w/o FDR}
     \begin{figure}
         \centerline{
-        \includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/anova_heatmap_patient_vs_control_none.pdf}}
+        \includegraphics[width=0.9\paperwidth]{../../FRDA project/baseline_lumi/anova_heatmap_patient_vs_control_none.pdf}}
     \end{figure}
 \end{frame}
 
@@ -259,7 +258,7 @@
     \frametitle{Patient vs. Carrier Heatmap w/o FDR}
     \begin{figure}
         \centerline{
-        \includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/anova_heatmap_patient_vs_carrier_none.pdf}}
+        \includegraphics[width=0.9\paperwidth]{../../FRDA project/baseline_lumi/anova_heatmap_patient_vs_carrier_none.pdf}}
     \end{figure}
 \end{frame}
 
@@ -267,33 +266,33 @@
     \frametitle{Control vs. Carrier Heatmap w/o FDR}
     \begin{figure}
         \centerline{
-        \includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/anova_heatmap_carrier_vs_control_none.pdf}}
+        \includegraphics[width=0.9\paperwidth]{../../FRDA project/baseline_lumi/anova_heatmap_carrier_vs_control_none.pdf}}
     \end{figure}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Patient vs. Control Heatmap w/ FDR}
-    \begin{figure}
-        \centerline{
-        \includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/anova_heatmap_patient_vs_control_fdr.pdf}}
-    \end{figure}
-\end{frame}
+%\begin{frame}
+    %\frametitle{Patient vs. Control Heatmap w/ FDR}
+    %\begin{figure}
+        %\centerline{
+        %\includegraphics[width=0.9\paperwidth]{../../FRDA project/baseline_lumi/anova_heatmap_patient_vs_control_fdr.pdf}}
+    %\end{figure}
+%\end{frame}
 
-\begin{frame}
-    \frametitle{Patient vs. Carrier Heatmap w/ FDR}
-    \begin{figure}
-        \centerline{
-        \includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/anova_heatmap_patient_vs_carrier_fdr.pdf}}
-    \end{figure}
-\end{frame}
+%\begin{frame}
+    %\frametitle{Patient vs. Carrier Heatmap w/ FDR}
+    %\begin{figure}
+        %\centerline{
+        %\includegraphics[width=0.9\paperwidth]{../../FRDA project/baseline_lumi/anova_heatmap_patient_vs_carrier_fdr.pdf}}
+    %\end{figure}
+%\end{frame}
 
-\begin{frame}
-    \frametitle{Control vs. Carrier Heatmap w/ FDR}
-    \begin{figure}
-        \centerline{
-        \includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/anova_heatmap_carrier_vs_control_fdr.pdf}}
-    \end{figure}
-\end{frame}
+%\begin{frame}
+    %\frametitle{Control vs. Carrier Heatmap w/ FDR}
+    %\begin{figure}
+        %\centerline{
+        %\includegraphics[width=0.9\paperwidth]{../../FRDA project/baseline_lumi/anova_heatmap_carrier_vs_control_fdr.pdf}}
+    %\end{figure}
+%\end{frame}
 
 %\begin{frame}
     %\frametitle{Top 30 Differentially Expressed Genes}
