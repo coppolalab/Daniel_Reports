@@ -1,0 +1,195 @@
+\documentclass{beamer}
+\usefonttheme{professionalfonts}
+\usepackage{fontspec}
+\setsansfont{Oxygen-Regular}
+\usepackage{pgfplotstable, pgfplots, grffile}
+\usepackage{colortbl, array, graphicx}
+\pgfplotsset{compat=newest}
+\setbeamertemplate{blocks}[rounded]
+\mode<presentation>
+
+\makeatletter
+\newcommand{\thickhline}{%
+    \noalign {\ifnum 0=`}\fi \hrule height 1pt
+    \futurelet \reserved@a \@xhline
+}
+\newcolumntype{E}{@{\vrule width 1pt\hspace{\tabcolsep}}}
+\newcolumntype{F}{@{\hspace{\tabcolsep}\vrule width 1pt\hspace{\tabcolsep}}}
+\newcolumntype{G}{@{\hspace{\tabcolsep}\vrule width 1pt}}
+\makeatother
+
+\title{Summary of other FRDA datasets}
+\author{Daniel Nachun}
+
+\begin{document}
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}
+    \frametitle{Other Datasets}
+    \begin{block}{}
+    \renewcommand{\arraystretch}{1.3}
+    \fontsize{7}{8.5}\selectfont    
+    \setlength{\tabcolsep}{2pt}
+    \begin{center}
+        \centerline{
+        \pgfplotstabletypeset[
+        col sep=comma, 
+        string type, 
+        ignore chars={"}, 
+        every even row/.style={before row={\rowcolor{lightgray}}},
+        every first column/.style={column type=EcF},
+        display columns/6/.style={column type=cG},
+        every head row/.style={before row=\thickhline, after row=\thickhline},
+        every last row/.style={after row=\thickhline}
+        ]
+        {datasets.csv}}
+    \end{center}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{GSE15848}
+    \begin{itemize}
+    \item 2 genotypes: KIKO and WT mice\\
+    \item 3 tissues: Heart, Skeletal Muscle, Liver\\
+    \item 4 replicates each for heart and skeletal mucle, 3 for liver\\
+    \item 22 total samples\\
+    \vspace{\baselineskip}
+    \item Illumina mouseRef-8 v1.0 has 23978 probes
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{KIKO Mouse DE}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../../kiko/threshold_selection.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{GSE10745}
+    \begin{itemize}
+    \item 2 genotypes: KIKI and WT mice\\
+    \item 3 tissues: brain, cerebellum, heart\\
+    \item 2 treatments: Compound 106 and control\\
+    \item 12 groups x 4 replicates each = 48 samples\\
+    \vspace{\baselineskip}
+    \item Illumina mouseRef-8 v1.1 has 24607 probes\\
+    \vspace{\baselineskip}
+    \item Will probably need to exclude compound 106 treated mice
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{KIKI Mouse DE}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../../kiki/threshold_selection.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+%\begin{frame}
+    %\frametitle{GSE15843}
+    %\begin{itemize}
+    %\item NOTE: I'm not sure if these are the same mice in GSE15848 run on Agilent\\
+    %\item 2 genotypes: KIKO and WT\\
+    %\item 2 tissues: Heart and Skeletal Muscle\\
+    %\item 3 replicates x 4 groups = 12 samples\\
+    %\vspace{\baselineskip}
+    %\item Agilent Mouse G4121A has 22393 probes
+    %\end{itemize}
+%\end{frame}
+
+\begin{frame}
+    \frametitle{GSE30933}
+    \begin{itemize}
+    \item Used PBMCs from humans\\
+    \item 3 statuses: Patient, Carrier, Normal (Control?)\\
+    \item 5 treatments: Compound 106, 4b, 9b, DMSO and none\\
+    \item Number of replicates per group varies between 4 and 10 - 108 samples total\\
+    \item Untreated subjects: 10 Patients, 10 Carriers, 9 Normal\\
+    \vspace{\baselineskip}
+    \item Illumina humanRef-8 v2.0 has 20589 probes
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{2011 PBMC Study}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../../pbmc/threshold_selection.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{GSE65399}
+    \begin{itemize}
+    \item Uses human tissue from FRDA patients, healthy controls, and fetuses\\
+    \item iPSCs were generated from FRDA patients and health controls and differentiated into neurons\\
+    \item I can't figure out which samples are patients and controls, and how many are in each group\\
+    \item Gene expression profiles of those iPSCs were hierarchically clustered with fetal tissues\\
+    \item The iPSC-derived neurons clustered most closely with fetal brain tissue
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{GSE65399 Clustering}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.95\paperwidth]{./Soragni_hclust.png}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{iPSC Study}
+    \begin{figure}
+        \centerline{
+            \includegraphics[width=0.70\paperwidth]{../../ipsc/threshold_selection.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{RRHO Overlap}
+    \begin{figure}
+        \centerline{
+            \includegraphics[width=0.9\paperwidth]{../../FRDA project/overlap/overlap.heatmap.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+%\begin{frame}
+    %\frametitle{GSE22651}
+    %\begin{itemize}
+        %\item Uses iPSCs from FRDA patients and healthy controls\\
+        %\item Also includes arrays for cell lines and post-mortem tissue\\
+        %\item Annotation of samples is very poor - I can't determine which samples are the iPSCs\\
+    %\end{itemize}
+%\end{frame}
+
+%\begin{frame}
+    %\frametitle{GSE22651 clustering}
+    %\begin{figure}
+        %\centerline{
+        %\includegraphics[width=0.85\paperheight]{./Ku_hclust.png}}
+    %\end{figure}
+%\end{frame}
+
+%\begin{frame}
+    %\frametitle{GSE5040}
+    %\begin{itemize}
+        %\item Uses cell lines from 1 patient and 1 control\\
+        %\item Treated with FA1 (1uM, 2uM), FA2 (2uM) or untreated\\
+        %\item 3 replicates for each treatment group and condition\\
+        %\vspace{\baselineskip}
+        %\item Affymetrix Human U133 Plus 2.0 has 54675 probes (?)
+    %\end{itemize}
+%\end{frame}
+
+\end{document}

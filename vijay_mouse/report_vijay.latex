@@ -1,0 +1,358 @@
+\documentclass{beamer}
+\usefonttheme{professionalfonts}
+\usepackage{fontspec}
+\setsansfont{Oxygen-Regular}
+\usepackage{pgfplotstable, pgfplots, grffile}
+\usepackage{colortbl, array, graphicx}
+\usepackage{smartdiagram}
+\pgfplotsset{compat=newest}
+\setbeamertemplate{blocks}[rounded]
+\mode<presentation>
+
+\makeatletter
+\newcommand{\thickhline}{%
+    \noalign {\ifnum 0=`}\fi \hrule height 1pt
+    \futurelet \reserved@a \@xhline
+}
+\newcolumntype{E}{@{\vrule width 1pt\hspace{\tabcolsep}}}
+\newcolumntype{F}{@{\hspace{\tabcolsep}\vrule width 1pt\hspace{\tabcolsep}}}
+\newcolumntype{G}{@{\hspace{\tabcolsep}\vrule width 1pt}}
+\makeatother
+
+\title{Preliminary Analysis of FRDA Mouse Model}
+\author{Daniel Nachun}
+
+\begin{document}
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}
+    \frametitle{Summary}
+    \textbf{Samples}\\
+    16 batches, 192 samples\\
+    Illumina MouseRef-8 v2 Platform\\
+    \vspace{\baselineskip}
+    3 tissues: Heart, DRG, Cerebellum\\
+    2 genotypes: Transgenic (TG), Wildtype (WT)\\
+    3 treatments: Doxycyclin (DOX), No Drug (ND), Doxycyclin rescue (DOXR)\\
+    5 timepoints for all groups except TG DOXR, which has 2
+    \vspace{\baselineskip}
+    \textbf{Comparisons}\\
+    TG DOX vs. TG ND\\
+    TG DOX vs. WT DOX\\
+    TG ND vs. WT DOX?\\
+\end{frame}
+
+\begin{frame}
+    \frametitle{Preprocessing Workflow}
+    \begin{block}{}
+    \begin{center}
+        \centerline{
+            \smartdiagramset{font = \small, back arrow disabled=true, module minimum width = 8cm, module minimum height = 0.75cm, text width = 7.75cm, module y sep = 1.3}
+            \smartdiagram[flow diagram:vertical]{VST normalization, Outliers NOT removed, Batch correction with ComBat, No hidden factors found, Remove effects of age\, sex\, weight and RIN, Collapse rows by symbol}
+        }
+    \end{center}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Data Quality}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.95\paperwidth]{../../Vijay_mouse/baseline/baseline_intensity_notnorm.jpg}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sample Clustering Heatmap}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.87\paperheight]{../../Vijay_mouse/baseline/baseline_heatmap_norm.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sample Clustering}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../../Vijay_mouse/baseline/baseline_mds_tissue.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Outlier Plot in Heart}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.87\paperheight]{../../Vijay_mouse/baseline/cov_sd.pdf}
+        }
+    \end{figure}
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sample Clustering Heatmap in Heart}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.87\paperheight]{../../Vijay_mouse/baseline/cov_heatmap_500.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sample Clustering by Batch in Heart}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../../Vijay_mouse/baseline/cov_mds_batch.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sample Clustering by Genotype*Treatment in Heart}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../../Vijay_mouse/baseline/cov_mds_genotype_treatment.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Statistical Thresholds at Time Point 4 (Heart)}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../../Vijay_mouse/baseline/threshold_selection_4.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Statistical Thresholds at Time Point 5 (Heart)}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../../Vijay_mouse/baseline/threshold_selection_5.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Heatmap of Doxycyclin vs No Drug (Transgenic, Heart)}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../../Vijay_mouse/baseline/anova_heatmap_tg.dox_vs_tg.nd_none.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Heatmap of Transgenic vs. WT (DOX-treated, Heart)}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../../Vijay_mouse/baseline/anova_heatmap_tg.dox_vs_wt.dox_none.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Heatmap of DOX Rescue vs. DOX-treated (Transgenic, Heart)}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../../Vijay_mouse/baseline/anova_heatmap_tg.doxr_vs_tg.dox_none.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Outlier Plot in DRG}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.87\paperheight]{../../Vijay_mouse/baseline_drg/cov_sd.pdf}
+        }
+    \end{figure}
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sample Clustering Heatmap in DRG}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.87\paperheight]{../../Vijay_mouse/baseline_drg/cov_heatmap_500.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sample Clustering by Batch in DRG}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../../Vijay_mouse/baseline_drg/cov_mds_batch.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sample Clustering by Genotype*Treatment in DRG}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../../Vijay_mouse/baseline_drg/cov_mds_genotype_treatment.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Statistical Thresholds at Time Point 4 (DRG)}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../../Vijay_mouse/baseline_drg/threshold_selection_4.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Statistical Thresholds at Time Point 5 (DRG)}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../../Vijay_mouse/baseline_drg/threshold_selection_5.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Heatmap of Doxycyclin vs No Drug (Transgenic, DRG)}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../../Vijay_mouse/baseline_drg/anova_heatmap_tg.dox_vs_tg.nd_none.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Heatmap of Transgenic vs. WT (DOX-treated, DRG)}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../../Vijay_mouse/baseline_drg/anova_heatmap_tg.dox_vs_wt.dox_none.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Heatmap of DOX Rescue vs. DOX-treated (Transgenic, DRG)}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../../Vijay_mouse/baseline_drg/anova_heatmap_tg.doxr_vs_tg.dox_none.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Outlier Plot in Cerebellum}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.87\paperheight]{../../Vijay_mouse/baseline_cerebellum/cov_sd.pdf}
+        }
+    \end{figure}
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sample Clustering Heatmap in Cerebellum}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.87\paperheight]{../../Vijay_mouse/baseline_cerebellum/cov_heatmap_500.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sample Clustering by Batch in Cerebellum}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../../Vijay_mouse/baseline_cerebellum/cov_mds_batch.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sample Clustering by Genotype*Treatment in Cerebellum}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../../Vijay_mouse/baseline_cerebellum/cov_mds_genotype_treatment.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Statistical Thresholds at Time Point 4 (Cerebellum)}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../../Vijay_mouse/baseline_cerebellum/threshold_selection_4.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Statistical Thresholds at Time Point 5 (Cerebellum)}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../../Vijay_mouse/baseline_cerebellum/threshold_selection_5.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Heatmap of Doxycyclin vs No Drug (Transgenic, Cerebellum)}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../../Vijay_mouse/baseline_cerebellum/anova_heatmap_tg.dox_vs_tg.nd_none.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Heatmap of Transgenic vs. WT (DOX-treated, Cerebellum)}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../../Vijay_mouse/baseline_cerebellum/anova_heatmap_tg.dox_vs_wt.dox_none.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Heatmap of DOX Rescue vs. DOX-treated (Transgenic, Cerebellum)}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../../Vijay_mouse/baseline_cerebellum/anova_heatmap_tg.doxr_vs_tg.dox_none.pdf}
+        }
+    \end{figure}
+\end{frame}
+%\begin{frame}
+    %\frametitle{MI Time-Series Network Clustering}
+    %\begin{figure}
+        %\centerline{
+            %\includegraphics[height=0.85\paperheight]{../../Vijay_mouse/longnet/gene_dendrogram_and_module_colors_min50.pdf}
+        %}
+    %\end{figure}
+%\end{frame}
+
+\begin{frame}
+    \frametitle{Analyses}
+    \textbf{Skipped}\\
+    Sample size definitely too small for machine learning\\
+    WGCNA on uncollapsed time series has very poor scale free topology\\
+    \vspace{\baselineskip}
+    \textbf{Averaged Time Series}\\
+    Dynamic Time Warping - Excellent\\
+    Independent Components Analysis - Excellent\\
+    Mutual Information network - Excellent\\
+    Fuzzy c-means clustering - Not successful\\
+    \vspace{\baselineskip}
+    \textbf{Raw Time Series}\\
+    Timecourse - Excellent\\
+    BetR - Excellent\\
+    Dynamic Bayesian Networks - need to choose genes\\
+    Probabilistic Boolean Networks - need to choose genes\\ 
+\end{frame}
+
+\end{document}

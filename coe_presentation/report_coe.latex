@@ -29,64 +29,6 @@
     \titlepage
 \end{frame}
 
-\begin{frame}[t]{What is Friedreich's Ataxia}
-    \begin{itemize}
-        \item Rare genetic disorder characterized by:
-            \begin{itemize}
-                \item Abnormal, uncoordinated movements (ataxia)
-                \item Loss of reflexes and hearing
-                \item Difficulty with eye movement and swallowing
-                \item Left ventricular hypertrophy 
-                \item Diabetes
-                \item Scoliosis
-            \end{itemize}
-        \item Exclusive to Europeans - incidence ranges from 1:20000 to 1:50000
-        \item Average age of onset is 10-15 years old - life expectancy was historically ~35 years old but increasing
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Frataxin (FXN)}
-    \begin{itemize}
-        \item Protein necessary for production of iron sulfur clusters in mitochondria
-        \item Conserved in all eukaryotes - LOF is embryonic lethal 
-        \item FRDA patients have a trinucleotide (GAA) intronic repeat expansion - 70-700 repeats
-        \item Protein product and mRNA processing are unaffected
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{FRDA as an Epigenetic Disorder}
-    \begin{figure}
-        \centerline{
-        \includegraphics[width=0.9\paperwidth]{./epigenetic.png}}
-    \end{figure}
-\end{frame}
-
-\begin{frame}{FXN haploinsufficiency}
-    \begin{figure}
-        \centerline{
-        \includegraphics[width=0.9\paperwidth]{./haploinsufficency.png}}
-    \end{figure}
-\end{frame}
-
-%\begin{frame}
-    %\frametitle{Summary}
-    %\textbf{Samples}\\
-    %18 batches, 1179 samples\\
-    %Illumina Human HT-12 v4 Platform\\
-    %\vspace{\baselineskip}
-    %\textbf{Analysis}\\
-    %Baseline:\\
-     %samples, excluding 1 outlier, 4 replicates, and 4 patients with ambiguous FA status\\
-    %\vspace{\baselineskip}
-    %All time points:\\
-    %1179 samples, excluding same samples plus two more outliers\\
-    %\vspace{\baselineskip}
-    %\textbf{Comparisons}\\
-    %Carriers vs. Controls\\
-    %Patients vs. Controls\\
-    %Patients vs. Carriers\\
-%\end{frame}
-
 \begin{frame}
     \frametitle{Sample Sizes}
     \begin{block}{}
@@ -109,7 +51,7 @@
         every head row/.style={before row=\thickhline, after row=\thickhline},
         every last row/.style={before row=\thickhline, after row=\thickhline}
         ]
-        {patient_table.csv}}
+        {../frda/patient_table.csv}}
     \end{center}
     \end{block}
 \end{frame}
@@ -133,7 +75,7 @@
         every first column/.style={column type=EcF},
         every last column/.style={column type=FcG}
         ]
-        {longitudinal_table.csv}}
+        {../frda/longitudinal_table.csv}}
     \end{center}
 \end{block}
 \end{frame}
@@ -177,16 +119,6 @@
     \end{figure}
 \end{frame}
 
-%\begin{frame}
-    %\frametitle{Sample Clustering}
-    %\begin{figure}
-        %\centerline{
-            %\includegraphics[width=0.475\paperwidth]{../../FRDA project/baseline_lumi/rmreps_mds_batch.pdf}
-            %\includegraphics[width=0.475\paperwidth]{../../FRDA project/baseline_lumi/rmreps_mds_diagnosis.pdf}
-        %}
-    %\end{figure}
-%\end{frame}
-
 \begin{frame}
     \frametitle{Sample Clustering}
     \begin{figure}
@@ -196,19 +128,6 @@
         }
     \end{figure}
 \end{frame}
-
-%\begin{frame}
-    %\frametitle{Batch Effect Correction with ComBat}
-    %Batch effect is result of variable conditions and handling of samples during individual microarray runs\\
-    %\vspace{\baselineskip}
-    %ComBat from sva package was created to remove this effect\\
-    %\begin{itemize}
-    %\item Uses parametric Empirical Bayesian model:\\
-    %\centerline{\(Y_{ijg} = \alpha_g + X\beta_g + \gamma_{ig} + \delta_{ig}\epsilon_{ijg}\)}
-    %\item Requires that batches be known in advance\\
-    %\item Other covariates to be preserved (i.e. age, sex) must be provided\\
-    %\end{itemize}
-%\end{frame}
 
 \begin{frame}
     \frametitle{Sample Clustering Heatmap}
@@ -220,89 +139,12 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Probabilistic Evaluation of Expression Residuals}
-    \vspace{-.5cm}
-    \begin{figure}
-    \centerline{\includegraphics[width=0.95\paperwidth]{./PEER.png}}
-    \end{figure}
-    \vspace{-.75cm}
-    Used to calculate hidden factors which add noise to data
-    \begin{itemize}
-        \item Number of factors must be specified in advance
-        \item Any covariates you wish to study later must also be provided
-        \item Difficult to validate and properly integrate into workflow
-    \end{itemize}
-\end{frame}
-
-%\begin{frame}
-    %\frametitle{PEER Weights}
-    %\begin{figure}
-        %\centerline{
-        %\includegraphics[width=0.85\paperwidth]{../../FRDA project/baseline_lumi/PEER_weights.pdf}}
-    %\end{figure}
-%\end{frame}
-
-%\begin{frame}
-    %\frametitle{PEER Factor-Trait Heatmap}
-    %\begin{figure}
-        %\centerline{
-        %\includegraphics[height=0.95\paperheight]{../../FRDA project/baseline_lumi/PEER factor-trait relationships.pdf}}
-    %\end{figure}
-%\end{frame}
-
-%\begin{frame}
-    %\frametitle{Empirical Bayesian Linear Modeling}
-    %Used to test difference in gene expression between groups\\
-    %One linear model per gene: \(E(\mathbf{y}_g) = X\pmb{\alpha}_g\)\\
-    %False discovery rate is optionally used for multiple comparisons correction\\
-    %\vspace{\baselineskip}
-    %We are interested in coefficents from contrast matrix: \(\pmb{\beta}_g = C^T\pmb(\alpha)_g\)
-    %\begin{itemize}
-        %\item Our contrasts: Patient - Carrier, Patient - Control, Carrier - Control
-        %\item Age, sex, and PEER factors included as additional covariates
-        %\item Small number of controls means comparisons with them have less statistical power
-    %\end{itemize}
-%\end{frame}
-
-\begin{frame}
     \frametitle{Threshold Selection}
     \begin{figure}
         \centerline{
         \includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/threshold_selection.pdf}}
     \end{figure}
 \end{frame}
-
-%\begin{frame}
-    %\frametitle{Selected Threshold w/o FDR}
-    %\begin{figure}
-        %\centerline{
-        %\includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/selected_threshold.pdf}}
-    %\end{figure}
-%\end{frame}
-
-%\begin{frame}
-    %\frametitle{Selected Threshold w/ FDR}
-    %\begin{figure}
-        %\centerline{
-        %\includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/selected_threshold_fdr.pdf}}
-    %\end{figure}
-%\end{frame}
-
-%\begin{frame}
-    %\frametitle{Differential Expression Venn Diagram w/o FDR}
-    %\begin{figure}
-        %\centerline{
-        %\includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/venn.pdf}}
-    %\end{figure}
-%\end{frame}
-
-%\begin{frame}
-    %\frametitle{Differential Expression Venn Diagram w/ FDR}
-    %\begin{figure}
-        %\centerline{
-        %\includegraphics[height=0.85\paperheight]{../../FRDA project/baseline_lumi/venn_fdr.pdf}}
-    %\end{figure}
-%\end{frame}
 
 \begin{frame}
     \frametitle{Patient vs. Control Heatmap w/ FDR}
@@ -353,6 +195,48 @@
     \end{figure}
 \end{frame}
 
+\begin{frame}
+    \frametitle{GAD1 Outlier Plot}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.9\paperwidth]{../../FRDA project/outlier/GAD1.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{FCGR1A Outlier Plot}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.9\paperwidth]{../../FRDA project/outlier/FCGR1A.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{RPS2 Outlier Plot}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.9\paperwidth]{../../FRDA project/outlier/RPS2.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{BTN3A2 Outlier Plot}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.9\paperwidth]{../../FRDA project/outlier/BTN3A2.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Overlap with Other Datasets}
+    \begin{figure}
+        \centerline{\includegraphics[width=0.9\paperwidth]{../../FRDA project/overlap/up.heatmap.pdf}}
+    \end{figure}
+    \vspace{-0.5cm}
+    \begin{figure}
+        \centerline{\includegraphics[width=0.9\paperwidth]{../../FRDA project/overlap/down.heatmap.pdf}}
+    \end{figure}
+\end{frame}
 
 \begin{frame}
     \frametitle{WGCNA Analysis Workflow}
@@ -386,7 +270,7 @@
     \frametitle{WGCNA Module Cluster Dendrogram}
     \begin{figure}
         \centerline{
-        \includegraphics[width=0.95\paperwidth]{../../FRDA project/WGCNA/eigengenes.pdf}}
+        \includegraphics[height=0.85\paperheight]{../../FRDA project/WGCNA/eigengenes.pdf}}
     \end{figure}
 \end{frame}
 
@@ -440,10 +324,11 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{WGCNA (Patient Only) Module-Trait Heatmap}
+    \frametitle{WGCNA (Patient Only) Sigificant Modules}
     \begin{figure}
         \centerline{
-        \includegraphics[height=0.85\paperheight]{../../FRDA project/WGCNA_GAA/module-trait relationships.pdf}}
+        \includegraphics[width=0.45\paperwidth]{../../FRDA project/WGCNA_GAA/GAA1_brown_eigengenes_05.pdf}
+        \includegraphics[width=0.45\paperwidth]{../../FRDA project/WGCNA_GAA/GAA1_salmon_eigengenes_05.pdf}}
     \end{figure}
 \end{frame}
 
@@ -451,7 +336,7 @@
     \frametitle{Salmon Module PPI}
     \begin{figure}
         \centerline{
-        \includegraphics[height=0.87\paperheight]{./salmon.png}}
+        \includegraphics[height=0.87\paperheight]{../frda/salmon.png}}
     \end{figure}
 \end{frame}
 
@@ -480,14 +365,6 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{SVM-RFE Machine Learning}
-    \begin{figure}
-        \centerline{
-        \includegraphics[width=0.87\paperwidth]{../../FRDA project/classification/svm.rfe.accuracies.pdf}}
-    \end{figure}
-\end{frame}
-
-\begin{frame}
     \frametitle{GAA Machine Learning}
     \begin{figure}
         \centerline{
@@ -496,12 +373,83 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Other Analyses} 
-    \begin{itemize}
-        \item Outlier Analysis
-        \item Overlap Analysis
-        \item Longitudinal Analysis
-    \end{itemize}
+    \frametitle{First ICA Component Enrichr}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.87\paperwidth]{../../FRDA project/ica/X1.enrichr.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Third ICA Component Enrichr}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.87\paperwidth]{../../FRDA project/ica/X3.enrichr.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Third ICA Component PPI}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.87\paperheight]{../../FRDA project/ica/stringdb/means/Patient/X3.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{DTW Patient vs. Carrier}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.87\paperwidth]{../../FRDA project/dtw/pca.enrichr.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{DTW Patient vs. Control}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.87\paperwidth]{../../FRDA project/dtw/pco.enrichr.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Mutual Information Network}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.87\paperwidth]{../../FRDA project/longnet/gene_dendrogram_and_module_colors_min50.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Brown Module Enrichr}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.87\paperwidth]{../../FRDA project/longnet/brown.enrichr.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Brown Module PPI}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.87\paperheight]{../../FRDA project/longnet/brown.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Causal Network of Black Module}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.90\paperheight]{../../FRDA project/causal_network/test.black.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Causal Network of Brown Module}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.90\paperheight]{../../FRDA project/causal_network/test.brown.pdf}}
+    \end{figure}
 \end{frame}
 
 \begin{frame}

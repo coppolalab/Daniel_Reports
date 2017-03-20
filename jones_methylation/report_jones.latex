@@ -1,0 +1,688 @@
+\documentclass{beamer}
+\usefonttheme{professionalfonts}
+\usepackage{pgfplotstable, pgfplots, grffile, float}
+\usepackage{booktabs, colortbl, array, graphicx}
+\usepackage{smartdiagram}
+\pgfplotsset{compat=newest}
+\setbeamertemplate{blocks}[rounded]
+\mode<presentation>
+\usetheme[numbering=fraction,progressbar=foot,block=fill]{metropolis}
+\setsansfont{Noto Sans}
+
+\newcolumntype{C}{>{\centering\arraybackslash}m{6em}}
+\newcolumntype{D}{>{\centering\arraybackslash}m{8em}}
+
+\makeatletter
+\newcommand{\thickhline}{%
+    \noalign {\ifnum 0=`}\fi \hrule height 1pt
+    \futurelet \reserved@a \@xhline
+}
+\newcolumntype{E}{@{\vrule width 1pt\hspace{\tabcolsep}}}
+\newcolumntype{F}{@{\hspace{\tabcolsep}\vrule width 1pt\hspace{\tabcolsep}}}
+\newcolumntype{G}{@{\hspace{\tabcolsep}\vrule width 1pt}}
+\makeatother
+
+\title{Intestinal Tissue Methylation and Gene Expression Study}
+\subtitle{Collaboration with Jones Lab}
+\author{Daniel Nachun}
+
+\begin{document}
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}
+    \frametitle{Aging in the Intestine}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.45\paperwidth]{./colon_aging.png}
+        \hspace{0.2cm}
+        \includegraphics[width=0.45\paperwidth]{./duodenum_aging.png}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Cancer Incidence}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.8\paperheight]{./cancer_risk.png}}
+    \end{figure}
+    \vspace{-1.2cm}
+    \small
+    \centering
+    Duodenal cancer is 0.47\% of cancer cases
+\end{frame}
+
+\begin{frame}
+    \frametitle{Intestinal Anatomy}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.8\paperheight]{./INTESTINES COMPARED.jpg}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Intestinal Crypts}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.7\paperheight]{./Epithelial_cell_migration.png}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sample Summary (Methylation)}
+    \begin{itemize}
+        \item Illumina Human Methylation 450k array data from human patients
+        \item 2 tissues: Small intestine and colon (and one unknown)
+        \item 4 cell types: Mucosa, crypts, enteroids, spheroids (plus one "whole bowel")
+        \item All unknown and whole bowel samples dropped
+        \item Pediatric samples also removed due to extreme differences
+        \vspace{0.3cm}
+        \renewcommand{\arraystretch}{1.3}
+        %\fontsize{7}{8.5}\selectfont    
+        \begin{center}
+            \setlength{\tabcolsep}{2pt}
+            \centerline{
+            \pgfplotstabletypeset[
+            col sep=comma, 
+            string type, 
+            ignore chars={"}, 
+            %every even row/.style={before row={\rowcolor{white}}},
+            every first column/.style={column type=EcF},
+            every last column/.style={column type=FcG},
+            %display columns/4/.style={column type=D},
+            %display columns/5/.style={column type=C},
+            %display columns/6/.style={column type=C},
+            %display columns/7/.style={column type=CG},
+            every head row/.style={before row=\thickhline, after row=\thickhline},
+            every last row/.style={before row=\thickhline, after row=\thickhline}
+            ]
+            {../../Jones_methylation/baseline_methylation/pheno_table.csv}}
+        \end{center}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sample Summary (Gene Expression Arrays)}
+    \begin{itemize}
+        \item Illumina HT12 v4 array data from patients - some overlap with methylation
+        \item 16 duodenum crypt samples, 6 colon crypt samples
+        \item RNA of sufficient quality could not be extracted from mucosa, possibly due to the presence of high concentrations of RNAse in mucosa
+    \end{itemize} 
+\end{frame}
+
+\begin{frame}
+    \frametitle{Methylation Biological Clock}
+    \begin{itemize}
+        \item Predictive elastic net penalized regression model that estimates age from methylation in multiple tissues in healthy subjects (including colon but not small intestine)
+        \item Regression model selected 353 CpGs with non-zero coefficients
+        \item Deviations between predicted biological age compared to chronological age has been observed in neurodegeneration and cancer
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Chronological vs. Predicted Biological Age}
+    \begin{figure}
+        \centering{
+        \includegraphics[height=0.80\paperheight]{../../Jones_methylation/baseline_methylation/diff.plot.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Chronological vs. Predicted Biological Age}
+    \begin{itemize}
+        \item Kruskal-Wallis non-parametric ANOVA is significant (p < 0.00015) across all groups
+        \item Pairwise comparisons with Dunn's test were only significant for duodenal crypts vs. other groups
+        \item Previous analysis found no difference between duodenal-derived organoids and duodenal crypts
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Chronological vs. Predicted Biological Age (Bayesian Estimate)}
+    \begin{figure}
+        \centering{
+        \includegraphics[height=0.75\paperheight]{../../Jones_methylation/baseline_methylation/estimate.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Differential Promoter/Gene Methylation Workflow}
+    \begin{center}
+        \centerline{
+            \smartdiagramset{font = \tiny, back arrow disabled=true, module minimum height = 0.4cm, module minimum width = 6cm, module y sep = 1.1, text width = 5.75cm}
+            \smartdiagram[flow diagram:vertical]{Probe filtering, Background Correction with noob, Normalization with BMIQ, Aggregate CpG sites by promoters/genes, Empirical Bayesian Linear Modeling, Annotate with Ensembl}
+        }
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Probe Filtering Steps}
+    \begin{center}
+        \centerline{
+            \smartdiagramset{font = \tiny, back arrow disabled=true, module minimum height = 0.4cm, module minimum width = 6cm, module y sep = 1.1, text width = 5.75cm}
+            \smartdiagram[flow diagram:vertical]{Remove probes outside CpG context, Remove SNP probes, Remove probes on sex chromosomes, Remove probes with detection score < 0.95, Remove probes with invalid \(\beta\)-values, Remove probes with standard deviation below 0.005}
+        }
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{PCA of Promoter \(\beta\)-Values}
+    \begin{figure}
+        \centering{
+        \includegraphics[height=0.8\paperheight]{../../Jones_methylation/baseline_methylation/promoters_combined_rmcov.pdf}}
+    \end{figure}
+\end{frame}
+
+%\begin{frame}
+    %\frametitle{PCA of Gene \(\beta\)-Values}
+    %\begin{figure}
+        %\centering{
+        %\includegraphics[height=0.8\paperheight]{../../Jones_methylation/baseline_methylation/genes_combined_rmcov.pdf}}
+    %\end{figure}
+%\end{frame}
+
+%\begin{frame}
+    %\frametitle{PCA of Site \(\beta\)-Values}
+    %\begin{figure}
+        %\centering{
+        %\includegraphics[height=0.8\paperheight]{../../Jones_methylation/baseline_methylation/sites_combined_rmcov.pdf}}
+    %\end{figure}
+%\end{frame}
+
+\begin{frame}
+    \frametitle{Promoter P-value thresholds}
+    \begin{figure}
+        \centering{
+        \includegraphics[height=0.8\paperheight]{../../Jones_methylation/baseline_methylation/promoter_threshold_selection.pdf}}
+    \end{figure}
+\end{frame}
+
+%\begin{frame}
+    %\frametitle{Gene P-value thresholds}
+    %\begin{figure}
+        %\centering{
+        %\includegraphics[height=0.8\paperheight]{../../Jones_methylation/baseline_methylation/gene_threshold_selection.pdf}}
+    %\end{figure}
+%\end{frame}
+
+%\begin{frame}
+    %\frametitle{Site P-value thresholds}
+    %\begin{figure}
+        %\centering{
+        %\includegraphics[height=0.8\paperheight]{../../Jones_methylation/baseline_methylation/site_threshold_selection.pdf}}
+    %\end{figure}
+%\end{frame}
+
+\begin{frame}
+    \frametitle{Promoter Crypt vs. Mucosa Volcano Plots}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.45\paperwidth]{../../Jones_methylation/baseline_methylation/promoters_duodenum.mucosa_vs._duodenum.crypts.pdf}
+        \includegraphics[width=0.45\paperwidth]{../../Jones_methylation/baseline_methylation/promoters_colon.mucosa_vs._colon.crypts.pdf}}
+    \end{figure}
+\end{frame}
+
+%\begin{frame}
+    %\frametitle{Gene Crypt vs. Mucosa Volcano Plots}
+    %\begin{figure}
+        %\centerline{
+        %\includegraphics[width=0.45\paperwidth]{../../Jones_methylation/baseline_methylation/genes_duodenum.mucosa_vs._duodenum.crypts.pdf}
+        %\includegraphics[width=0.45\paperwidth]{../../Jones_methylation/baseline_methylation/genes_colon.mucosa_vs._colon.crypts.pdf}}
+    %\end{figure}
+%\end{frame}
+
+\begin{frame}
+    \frametitle{Promoter Crypt vs. Mucosa Volcano Plots}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.45\paperwidth]{../../Jones_methylation/baseline_methylation/promoters_duodenum.crypts_vs._colon.crypts.pdf}
+        \includegraphics[width=0.45\paperwidth]{../../Jones_methylation/baseline_methylation/promoters_duodenum.mucosa_vs._colon.mucosa.pdf}}
+    \end{figure}
+\end{frame}
+
+%\begin{frame}
+    %\frametitle{Gene Crypt vs. Mucosa Volcano Plots}
+    %\begin{figure}
+        %\centerline{
+        %\includegraphics[width=0.45\paperwidth]{../../Jones_methylation/baseline_methylation/genes_duodenum.crypts_vs._colon.crypts.pdf}
+    %\includegraphics[width=0.45\paperwidth]{../../Jones_methylation/baseline_methylation/genes_duodenum.mucosa_vs._colon.mucosa.pdf}}
+    %\end{figure}
+%\end{frame}
+
+\begin{frame}
+    \frametitle{UpSet plot of differential methylation overlaps (FDR < 0.01, promoters)}
+    \begin{figure}
+        \centerline{
+            \includegraphics[width=0.8\paperwidth]{../../Jones_methylation/baseline_methylation/upset.promoters.new.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+%\begin{frame}
+    %\frametitle{UpSet plot of differential methylation overlaps (FDR < 0.01, genes)}
+    %\begin{figure}
+        %\centerline{
+            %\includegraphics[width=0.8\paperwidth]{../../Jones_methylation/baseline_methylation/upset.genes.new.pdf}
+        %}
+    %\end{figure}
+%\end{frame}
+
+\begin{frame}
+    \frametitle{Top 5 Differentially Methylated Promoters \\(mucosa vs. crypts)}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.95\paperwidth]{../../Jones_methylation/baseline_methylation/top5_promoters_duodenum.mucosa_vs._duodenum.crypts.pdf}}
+    \end{figure}
+    \vspace{-1.0cm}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.95\paperwidth]{../../Jones_methylation/baseline_methylation/top5_promoters_colon.mucosa_vs._colon.crypts.pdf}}
+    \end{figure}
+\end{frame}
+
+%\begin{frame}
+    %\frametitle{Top 5 Differentially Methylated Genes \\(mucosa vs. crypts)}
+    %\begin{figure}
+        %\centerline{
+        %\includegraphics[width=0.95\paperwidth]{../../Jones_methylation/baseline_methylation/top5_genes_duodenum.mucosa_vs._duodenum.crypts.pdf}}
+    %\end{figure}
+    %\vspace{-1.0cm}
+    %\begin{figure}
+        %\centerline{
+        %\includegraphics[width=0.95\paperwidth]{../../Jones_methylation/baseline_methylation/top5_genes_colon.mucosa_vs._colon.crypts.pdf}}
+    %\end{figure}
+%\end{frame}
+
+\begin{frame}
+    \frametitle{Top 5 Differentially Methylated Promoters \\(colon vs. duodenum)}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.95\paperwidth]{../../Jones_methylation/baseline_methylation/top5_promoters_duodenum.crypts_vs._colon.crypts.pdf}}
+    \end{figure}
+    \vspace{-1.0cm}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.95\paperwidth]{../../Jones_methylation/baseline_methylation/top5_promoters_duodenum.mucosa_vs._colon.mucosa.pdf}}
+    \end{figure}
+\end{frame}
+
+%\begin{frame}
+    %\frametitle{Top 5 Differentially Methylated Genes \\(colon vs. duodenum)}
+    %\begin{figure}
+        %\centerline{
+        %\includegraphics[width=0.95\paperwidth]{../../Jones_methylation/baseline_methylation/top5_genes_duodenum.crypts_vs._colon.crypts.pdf}}
+    %\end{figure}
+    %\vspace{-1.0cm}
+    %\begin{figure}
+        %\centerline{
+        %\includegraphics[width=0.95\paperwidth]{../../Jones_methylation/baseline_methylation/top5_genes_duodenum.mucosa_vs._colon.mucosa.pdf}}
+    %\end{figure}
+%\end{frame}
+
+\begin{frame}
+    \frametitle{GO and Pathway Analysis - duodenum crypts vs. colon crypts (promoters)}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.8\paperwidth]{../../Jones_methylation/baseline_methylation/dccc.promoters.enrichr.pdf}}
+    \end{figure}
+\end{frame}
+
+%\begin{frame}
+    %\frametitle{GO and Pathway Analysis - duodenum crypts vs. colon crypts (genes)}
+    %\begin{figure}
+        %\centering{
+        %\includegraphics[width=0.9\paperwidth]{../../Jones_methylation/baseline_methylation/dccc.genes.enrichr.pdf}}
+    %\end{figure}
+%\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA Promoter Methylation Analysis Workflow}
+    \begin{center}
+        \centerline{
+            \smartdiagramset{font = \tiny, back arrow disabled=true, module minimum height = 0.4cm, module minimum width = 6cm, module y sep = 1.1, text width = 5.75cm}
+            \smartdiagram[flow diagram:vertical]{Remove effects of other covariates, Calculate adjacency of methylation \(\beta\)-values using biweight mid-correlation, Convert adjacency to Topological Overlap Matrix, Cluster genes using average linked hierarchical clustering, Create modules using dynamic tree cutting, Calculate eigengene for each module, Assess eigengene significance using Kruskal-Wallis test}
+        }
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA Cluster Dendrogram (Promoters)}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.80\paperheight]{../../Jones_methylation/WGCNA_methylation/module_eigengene_clustering_min50.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA Module Cluster Dendrogram (Promoters)}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../Jones_methylation/WGCNA_methylation/eigengenes.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA Module-Trait Heatmap (Promoters)}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../Jones_methylation/WGCNA_methylation/module-trait relationships.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA Eigengenes (Promoters)}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../Jones_methylation/WGCNA_methylation/eigengene_plots.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Age Difference vs. Red Module}
+    \begin{figure}
+        \centerline{
+            \includegraphics[width=0.45\paperwidth]{../../Jones_methylation/baseline_methylation/estimate.pdf}
+            \includegraphics[width=0.45\paperwidth]{../../Jones_methylation/WGCNA_methylation/eigengene_red_estimate.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Age Difference vs. GreenYellow Module}
+    \begin{figure}
+        \centerline{
+            \includegraphics[width=0.45\paperwidth]{../../Jones_methylation/baseline_methylation/estimate.pdf}
+            \includegraphics[width=0.45\paperwidth]{../../Jones_methylation/WGCNA_methylation/eigengene_greenyellow_estimate.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Correlation between eigenpromoters and age difference}
+    \begin{figure}
+        \centerline{
+            \includegraphics[width=0.48\paperwidth]{../../Jones_methylation/WGCNA_methylation/red_difference.pdf}
+            \includegraphics[width=0.48\paperwidth]{../../Jones_methylation/WGCNA_methylation/greenyellow_difference.pdf}
+        }
+    \end{figure}
+    \vspace{-0.8cm}
+    \begin{itemize}
+        \item 55 genes from red module are in 353 predictors
+        \item 9 genes from greenyellow module are in 353 predictors
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Red Module Hub Genes and Functional Enrichment}
+    \begin{figure}
+        \centerline{
+            \includegraphics[width=0.60\paperwidth]{../../Jones_methylation/WGCNA_methylation/red.enrichr.pdf}
+            \includegraphics[width=0.35\paperwidth]{../../Jones_methylation/WGCNA_methylation/red_igraph.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{GreenYellow Module Hub Genes and Functional Enrichment}
+    \begin{figure}
+        \centerline{
+            \includegraphics[width=0.60\paperwidth]{../../Jones_methylation/WGCNA_methylation/greenyellow.enrichr.pdf}
+            \includegraphics[width=0.35\paperwidth]{../../Jones_methylation/WGCNA_methylation/greenyellow_igraph.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+%\begin{frame}
+    %\frametitle{WGCNA Cluster Dendrogram (Genes)}
+    %\begin{figure}
+        %\centerline{
+        %\includegraphics[height=0.80\paperheight]{../../Jones_methylation/WGCNA_genes/module_eigengene_clustering_min50.pdf}}
+    %\end{figure}
+%\end{frame}
+
+%\begin{frame}
+    %\frametitle{WGCNA Module Cluster Dendrogram (Genes)}
+    %\begin{figure}
+        %\centerline{
+        %\includegraphics[height=0.85\paperheight]{../../Jones_methylation/WGCNA_genes/eigengenes.pdf}}
+    %\end{figure}
+%\end{frame}
+
+%\begin{frame}
+    %\frametitle{WGCNA Module-Trait Heatmap (Genes)}
+    %\begin{figure}
+        %\centerline{
+        %\includegraphics[height=0.85\paperheight]{../../Jones_methylation/WGCNA_genes/module-trait relationships.pdf}}
+    %\end{figure}
+%\end{frame}
+
+%\begin{frame}
+    %\frametitle{WGCNA Eigengenes (Genes)}
+    %\begin{figure}
+        %\centerline{
+        %\includegraphics[height=0.85\paperheight]{../../Jones_methylation/WGCNA_genes/eigengene_plots.pdf}}
+    %\end{figure}
+%\end{frame}
+
+%\begin{frame}
+    %\frametitle{Age Difference vs. Black Module}
+    %\begin{figure}
+        %\centerline{
+            %\includegraphics[width=0.45\paperwidth]{../../Jones_methylation/baseline_methylation/estimate.pdf}
+            %\includegraphics[width=0.45\paperwidth]{../../Jones_methylation/WGCNA_genes/eigengene_black_estimate.pdf}
+        %}
+    %\end{figure}
+%\end{frame}
+
+%\begin{frame}
+    %\frametitle{Age Difference vs. Salmon Module}
+    %\begin{figure}
+        %\centerline{
+            %\includegraphics[width=0.45\paperwidth]{../../Jones_methylation/baseline_methylation/estimate.pdf}
+            %\includegraphics[width=0.45\paperwidth]{../../Jones_methylation/WGCNA_genes/eigengene_salmon_estimate.pdf}
+        %}
+    %\end{figure}
+%\end{frame}
+
+%\begin{frame}
+    %\frametitle{Correlation between eigenpromoters and age difference}
+    %\begin{figure}
+        %\centerline{
+            %\includegraphics[width=0.48\paperwidth]{../../Jones_methylation/WGCNA_genes/black_difference.pdf}
+            %\includegraphics[width=0.48\paperwidth]{../../Jones_methylation/WGCNA_genes/salmon_difference.pdf}
+        %}
+    %\end{figure}
+%\end{frame}
+
+%\begin{frame}
+    %\frametitle{Black Module Hub Genes and Functional Enrichment}
+    %\begin{figure}
+        %\centerline{
+            %\includegraphics[width=0.60\paperwidth]{../../Jones_methylation/WGCNA_genes/black.enrichr.pdf}
+            %\includegraphics[width=0.35\paperwidth]{../../Jones_methylation/WGCNA_genes/black_igraph.pdf}
+        %}
+    %\end{figure}
+%\end{frame}
+
+%\begin{frame}
+    %\frametitle{Salmon Module Hub Genes and Functional Enrichment}
+    %\begin{figure}
+        %\centerline{
+            %\includegraphics[width=0.60\paperwidth]{../../Jones_methylation/WGCNA_genes/salmon.enrichr.pdf}
+            %\includegraphics[width=0.35\paperwidth]{../../Jones_methylation/WGCNA_genes/salmon_igraph.pdf}
+        %}
+    %\end{figure}
+%\end{frame}
+
+\begin{frame}
+    \frametitle{Gene Expression Workflow}
+    \begin{center}
+        \centerline{
+            \smartdiagramset{font = \tiny, back arrow disabled=true, module minimum height = 0.4cm, module minimum width = 6cm, module y sep = 1.1, text width = 5.75cm}
+            \smartdiagram[flow diagram:vertical]{VST normalization, RSN inter-array normalization, Drop probes with detection score p-value > 0.01, Drop unannotated probes, Empirical Bayesian linear modelling}
+        }
+    \end{center}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{PCA Plot}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../Jones_methylation/differential_expression/mds_status_rmcov.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Volcano Plot}
+    \begin{itemize}
+        \item 3028 differentially expressed genes at FDR < 0.01
+    \end{itemize}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.75\paperheight]{../../Jones_methylation/differential_expression/volcano_dc.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Top 5 Gene Plots}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.90\paperwidth]{../../Jones_methylation/differential_expression/top5.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{GO and Pathway Analysis}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.90\paperwidth]{../../Jones_methylation/differential_expression/enrichr.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA Gene Expression Workflow}
+    \begin{center}
+        \centerline{
+            \smartdiagramset{font = \tiny, back arrow disabled=true, module minimum height = 0.4cm, module minimum width = 6cm, module y sep = 1.1, text width = 5.75cm}
+            \smartdiagram[flow diagram:vertical]{Remove effects of other covariates, Calculate adjacency of gene expression values using biweight mid-correlation, Convert adjacency to Topological Overlap Matrix, Cluster genes using average linked hierarchical clustering, Create modules using dynamic tree cutting, Calculate eigengene for each module, Assess eigengene significance using Kruskal-Wallis test}
+        }
+    \end{center}
+\end{frame}
+
+%\begin{frame}
+    %\frametitle{WGCNA Cluster Dendrogram}
+    %\begin{figure}
+        %\centerline{
+        %\includegraphics[height=0.80\paperheight]{../../Jones_methylation/WGCNA_expression/module_eigengene_clustering_min50.pdf}}
+    %\end{figure}
+%\end{frame}
+
+%\begin{frame}
+    %\frametitle{WGCNA Module Cluster Dendrogram}
+    %\begin{figure}
+        %\centerline{
+        %\includegraphics[height=0.85\paperheight]{../../Jones_methylation/WGCNA_expression/eigengenes.pdf}}
+    %\end{figure}
+%\end{frame}
+
+\begin{frame}
+    \frametitle{Eigengene Plots}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.9\paperwidth]{../../Jones_methylation/WGCNA_expression/eigengene_plots.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Blue Module Hub Genes and Functional Enrichment}
+    \begin{figure}
+        \centerline{
+            \includegraphics[width=0.60\paperwidth]{../../Jones_methylation/WGCNA_expression/blue.enrichr.pdf}
+            \includegraphics[width=0.35\paperwidth]{../../Jones_methylation/WGCNA_expression/blue_igraph.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Brown Module Hub Genes and Functional Enrichment}
+    \begin{figure}
+        \centerline{
+            \includegraphics[width=0.60\paperwidth]{../../Jones_methylation/WGCNA_expression/brown.enrichr.pdf}
+            \includegraphics[width=0.35\paperwidth]{../../Jones_methylation/WGCNA_expression/brown_igraph.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Turquoise Module Hub Genes and Functional Enrichment}
+    \begin{figure}
+        \centerline{
+            \includegraphics[width=0.60\paperwidth]{../../Jones_methylation/WGCNA_expression/turquoise.enrichr.pdf}
+            \includegraphics[width=0.35\paperwidth]{../../Jones_methylation/WGCNA_expression/turquoise_igraph.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Identifying Individual Genes}
+    \begin{itemize}
+        \item Filter differentially methylated genes by whether they are significantly different in the \textbf{same direction} in duodenum crypts vs. colon crypts \textbf{and} duodenum mucosa vs. duodenum crypts
+        \item Filter the above list of genes by whether they are differentially expressed in the \textbf{opposite} direction as their change in methylation
+        \item Results in 159 \textbf{hypomethylated upregulated} genes and 17 \textbf{hypermethylated downregulated} genes
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{GATA4}
+    \begin{tabular}{p{0.46\textwidth} p{0.46\textwidth}}
+      \vspace{0pt} \includegraphics[width=0.45\textwidth]{../../Jones_methylation/baseline_methylation/GATA4.pdf} &
+      \vspace{0pt} \includegraphics[width=0.45\textwidth]{../../Jones_methylation/differential_expression/GATA4.pdf}
+    \end{tabular}
+    %\begin{figure}
+        %\centerline{
+            %\includegraphics[width=0.50\paperwidth]{../../Jones_methylation/baseline_methylation/GATA4.pdf}
+            %\includegraphics[width=0.40\paperwidth]{../../Jones_methylation/differential_expression/GATA4.pdf}
+        %}
+    %\end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{GATA4/5 and Colon Cancer}
+    \begin{figure}
+        \centerline{
+            \includegraphics[width=0.90\paperwidth]{./GATA4.png}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Genes in Biological Clock}
+    \begin{itemize}
+        \item Methylation biological clock predictor contains 353 CpGs 
+        \item Nearest transcript was extracted using FDb.InfiniumMethylation package
+        \item Of the 159 hypomethylated upregulated genes, 2 were in the predictor - \textbf{MUC17} and CRADD
+        \item Of the 17 hypermethylated downregulated genes, 3 were in the predictor - \textbf{C10orf99}, \textbf{HOXB8}, \textbf{LGALS1}
+        \item Bolded genes have published studies linking them to colorectal cancer
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Conclusions}
+    \begin{itemize}
+        \item Duodenal crypts seem to show slower biological aging than colon crypts
+        \item Two WGCNA modules partially recapitulate age difference but don't necessarily correspond to gene expression changes
+        \item Combining methylation and expression data reveals interesting disease relevant genes
+        \item Further combining with age predictor genes yields additional interesting genes
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Future Directions}
+    \begin{itemize}
+        \item Validate genes in purified stems cells from crypts - extracted by passaging or FACS
+        \item Overexpress or suppress genes in stem cells and differentiate into organoids 
+    \end{itemize}
+\end{frame}
+
+\end{document}
+

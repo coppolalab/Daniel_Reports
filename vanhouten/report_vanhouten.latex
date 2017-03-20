@@ -1,0 +1,202 @@
+\documentclass{beamer}
+\usefonttheme{professionalfonts}
+\usepackage{fontspec}
+\setsansfont{Oxygen-Regular}
+\usepackage{pgfplotstable, pgfplots, grffile}
+\usepackage{booktabs, colortbl, array, graphicx}
+\usepackage{smartdiagram}
+\pgfplotsset{compat=newest}
+\setbeamertemplate{blocks}[rounded]
+\mode<presentation>
+\newcolumntype{C}{>{\centering\arraybackslash}m{6em}}
+\newcolumntype{D}{>{\centering\arraybackslash}m{8em}}
+
+\makeatletter
+\newcommand{\thickhline}{%
+    \noalign {\ifnum 0=`}\fi \hrule height 1pt
+    \futurelet \reserved@a \@xhline
+}
+\newcolumntype{E}{@{\vrule width 1pt\hspace{\tabcolsep}}}
+\newcolumntype{F}{@{\hspace{\tabcolsep}\vrule width 1pt\hspace{\tabcolsep}}}
+\newcolumntype{G}{@{\hspace{\tabcolsep}\vrule width 1pt}}
+\makeatother
+
+\title{Reanalysis of Van Houten FRDA Dataset}
+\author{Daniel Nachun}
+
+\begin{document}
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}
+    \frametitle{Samples}
+    103 Samples on Agilent Human 1A(V2)\\
+    Unknown number of batches (batch effect was reported to be an issue)\\
+    Only 1 time point\\
+    \vspace{\baselineskip}
+    62 Patients:\\
+    \begin{itemize}
+        \item 42 whole blood samples
+            \begin{itemize}
+                \item 28 children - all phenotype data available
+                \item 14 adults - "anonymous", missing all phenotype information
+            \end{itemize}
+        \item 21 lymphoblastoid lines
+    \end{itemize}
+    41 Controls:
+    \begin{itemize}
+        \item 25 whole blood samples - all phenotype data available
+        \item 16 lymphoblastoid lines - missing sex
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Original Study Design}
+    Three comparisons:\\
+    \begin{itemize}
+        \item Comparison of "child" FRDA blood samples to "child" blood controls
+        \item Comparison of "child" FRDA blood samples to "adult" FRDA blood samples
+        \item Comparison of FRDA lymphoblastoid samples to control lymphoblastoid samples
+    \end{itemize}
+    \vspace{\baselineskip}
+    Differential expression analyzed with SAM (Significance Analysis of Microarray)\\
+    \vspace{\baselineskip}
+    EPIG (\textbf{\underline{e}}xtracts microarray gene expression \textbf{\underline{p}}atterns and \textbf{\underline{i}}dentifies co-expressed \textbf{\underline{g}}enes) used to cluster genes and correlate to phenotype data
+\end{frame}
+
+\begin{frame}
+    \frametitle{Data Quality}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.95\paperwidth]{../VanHauten/baseline/1_base_signal.jpg}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sample Clustering}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../VanHauten/baseline/4_base_MDS_Status.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sample Clustering Heatmap}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.87\paperheight]{../VanHauten/baseline/2_base_heatmap.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{PEER Weights}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.85\paperwidth]{../VanHauten/baseline/PEER_weights.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{PEER Factor-Trait Heatmap}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.95\paperheight]{../VanHauten/baseline/PEER factor-trait relationships.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Threshold Selection}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../VanHauten/baseline/7_threshold_selection.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Patient vs. Control Heatmap w/o FDR}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../VanHauten/baseline/9_anova_heatmap_patient_vs_control_none.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Patient vs. Control Heatmap w/ FDR}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../VanHauten/baseline/9_anova_heatmap_patient_vs_control_fdr.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Top 30 Differentially Expressed Genes}
+    \vspace{-0.3cm}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=\paperwidth]{../VanHauten/baseline/significant_geneList_fdrLess001_time1.pdf}}
+    \end{figure}
+\end{frame}
+
+%Get rid of title
+\begin{frame}
+    \frametitle{WGCNA Cluster Dendrogram}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.95\paperwidth]{../VanHauten/WGCNA/4-module_eigengene_clustering_min50.pdf}}
+    \end{figure}
+\end{frame}
+
+%Get rid of title
+\begin{frame}
+    \frametitle{WGCNA Module Cluster Dendrogram}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.95\paperwidth]{../VanHauten/WGCNA/5-eigengenes.pdf}}
+    \end{figure}
+\end{frame}
+
+%Get rid of title, fix margins
+\begin{frame}
+    \frametitle{WGCNA Module-Trait Heatmap}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.95\paperheight]{../VanHauten/WGCNA/module-trait relationships.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA Module-PEER Factor Heatmap}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.95\paperheight]{../VanHauten/WGCNA/module-PEER factor relationships.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA (Patient Only) Cluster Dendrogram}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.95\paperwidth]{../VanHauten/WGCNA_GAA/4-module_eigengene_clustering_min50.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA (Patient Only) Module Cluster Dendrogram}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.95\paperwidth]{../VanHauten/WGCNA_GAA/5-eigengenes.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA (Patient Only) Module-Trait Heatmap}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.97\paperheight]{../VanHauten/WGCNA_GAA/module-trait relationships.pdf}}
+    \end{figure}
+\end{frame}
+
+\end{document}

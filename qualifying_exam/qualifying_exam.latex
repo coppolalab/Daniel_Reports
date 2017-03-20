@@ -1,0 +1,569 @@
+\documentclass{beamer}
+\usepackage{pgfplotstable, pgfplots, grffile}
+\usepackage{booktabs, colortbl, array, graphicx}
+\pgfplotsset{compat=newest}
+\usetheme[numbering=fraction,progressbar=foot,block=fill]{metropolis}
+\setsansfont{Noto Sans}
+\mode<presentation>
+
+\makeatletter
+\newcommand{\thickhline}{%
+    \noalign {\ifnum 0=`}\fi \hrule height 1pt
+    \futurelet \reserved@a \@xhline
+}
+
+\title{Oral Qualifying Exam}
+\author{Daniel Nachun}
+
+\begin{document}
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{My Journey So Far}
+    \begin{itemize}
+        \item May 2008 - Graduated from Westside High School in Omaha, Nebraska
+        \item June 2012 - Received BA in Biology from Williams College w/ concentrations in neuroscience and biochemistry
+        \item September 2012 - Started UCLA NSIDP
+        \item June 2013 - Joined lab of Chris Evans studying addiction in mice
+        \item July 2015 - Left Evans lab and joined Giovanni Coppola's lab
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Neurological and Psychiatric Disorders}
+    \begin{itemize}
+        \item 13 of the top 25 sources of global disease burden 
+        \item 53 million people had dementia 2013
+        \item 253 million people had depression in 2013
+        \item Treatments for neurodegeneration can only slow symptoms
+        \item Treatments for depression not universally effective
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Studying the CNS}
+    \begin{itemize}
+        \item Highly inaccessible
+        \item Composed mostly of delicate postmitotic cells 
+        \item Quantification of symptoms is very difficult - relies on self-reporting or clinical scales
+        \item Disorders tend to change fairly slowly over time
+        \item Biomarkers can be used to overcome some of these limitations
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Post-Mortem Studies}
+    \begin{columns}[t]
+    \begin{column}{0.5\textwidth}
+        \textbf{Advantages}
+        \begin{itemize}
+            \item Can directly study affected CNS tissues
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \textbf{Disadvantages}
+        \begin{itemize}
+            \item Biased towards more advanced stages of disease
+            \item Quality of biological material is often lower than in vivo samples
+        \end{itemize}
+    \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Cerebrospinal Fluid}
+    \begin{columns}[t]
+    \begin{column}{0.5\textwidth}
+        \textbf{Advantages}
+        \begin{itemize}
+            \item CSF interacts directly with CNS tissue
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \textbf{Disadvantages}
+        \begin{itemize}
+            \item Collection is fairly invasive and dangerous
+            \item Small numbers of cells
+        \end{itemize}
+    \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Peripheral blood}
+    \begin{columns}[t]
+    \begin{column}{0.5\textwidth}
+        \textbf{Advantages}
+        \begin{itemize}
+            \item Readily accessible and easy to extract
+            \item Can be sampled repeatedly
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \textbf{Disadvantages}
+        \begin{itemize}
+            \item Actively renewing cell population doesn’t accumulate changes
+            \item Less metabolically active than cells of CNS
+        \end{itemize}
+    \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{In vitro methods}
+    \begin{columns}[t]
+    \begin{column}{0.5\textwidth}
+        \textbf{Advantages}
+        \begin{itemize}
+            \item Cells can be acquired directly from patients
+            \item Can be differentiated into neurons and other CNS cell types
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \textbf{Disadvantages}
+        \begin{itemize}
+            \item Biological age may be too young for adult onset disease
+            \item Cannot recapitulate network properties of CNS
+        \end{itemize}
+    \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Animal models}
+    \begin{columns}[t]
+    \begin{column}{0.5\textwidth}
+        \textbf{Advantages}
+        \begin{itemize}
+            \item Any tissue can be accessed for study including CNS
+            \item Can be genetically engineered
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \textbf{Disadvantages}
+        \begin{itemize}
+            \item Does not always translate to humans
+            \item Sample sizes are often very small
+        \end{itemize}
+    \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Biological Materials}
+    \begin{itemize}
+        \item Peptides - protein expression
+        \item RNA - gene expression
+        \item DNA - genetic variation, methylation, histone modifications, chromosome structure
+        \item Gene expression and DNA methylation have the most mature and scalable technologies
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Microarrays vs. Next Generation Sequencing}
+    \begin{columns}[t]
+    \begin{column}{0.5\textwidth}
+        \textbf{Microarrays}
+        \begin{itemize}
+            \item Low cost
+            \item Faster acquisition and analysis
+            \item Noisier, especially at low levels
+            \item Available for many years
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \textbf{NGS}
+        \begin{itemize}
+            \item Higher cost, but dropping
+            \item Slower acquisition and analysis
+            \item Lower noise 
+            \item Only available more recently
+        \end{itemize}
+    \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Friedreich's Ataxia (FRDA) dataset}
+    \begin{itemize}
+        \item FRDA is a rare, autosomal recessive Mendelian disorder
+        \item Symptoms - problems with gait and voluntary movement, cardiac hypertrophy, diabetes
+        \item Very young onset - typically around puberty
+        \item Caused by GAA repeat expansion in frataxin (FXN) - reduces expression 65-95\%, probably driven by epigenetics
+        \item FXN is essential for the formation of iron-sulfur clusters used in mitochondria and breakdown of reactive oxygen species
+        \item 409 patients, 226 heterozygous carriers, 90 controls
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Dementia dataset}
+    \begin{columns}[t]
+    \begin{column}{0.5\textwidth}
+        \textbf{Alzheimer's Disease (AD)}
+        \begin{itemize}
+            \item Most common form of dementia
+            \item Characterized by memory loss and cognitive impairment
+            \item Genetic risk factors: ApoE, APP, PSEN1 and PSEN2
+            \item Risk of onset doubles every 5 years after age of 65
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \textbf{Mild Cognitive Impairment (MCI)}
+        \begin{itemize}
+            \item Similar symptoms to AD, but milder
+            \item Sometimes viewed as a transitory phase between normal aging and dementia
+            \item Roughly 50\% of MCI patients eventually develop dementia
+        \end{itemize}
+    \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Dementia dataset continued}
+    \textbf{Frontotemporal Dementia (FTD)}
+    \begin{itemize}
+        \item Second most prevalent form of dementia
+        \item Much earlier onset than AD - 50-60 years old
+        \item Symptoms: Changes in executive function and language difficulties
+        \item Genetic risk factors: C9orf72, GRN, MAPT, TDP-43, FUS
+        \item Subdivided into behavioral variant FTD (bvFTD), semantic dementia (SD) and progressive non-fluent aphasia (PNFA)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Dementia dataset}
+    \begin{columns}[t]
+    \begin{column}{0.5\textwidth}
+        \textbf{Movement Disorders}
+        \begin{itemize}
+            \item Amyotrophic lateral sclerosis (ALS), Corticobasal degeneration (CBD) and progressive supranuclear palsy (PSP)
+            \item Comorbid with some cases with FTD
+            \item Pathology and genetic risk factors overlap with FTD
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \textbf{Clinically Normal}
+        \begin{itemize}
+            \item Younger subjects with family history of dementia
+            \item Some have mutations in linked to dementia
+        \end{itemize}
+    \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sample Sizes}
+    \renewcommand{\arraystretch}{1.3}
+    \fontsize{8}{9.5}\selectfont    
+    \setlength{\tabcolsep}{2pt}
+    \begin{center}
+        \vspace{0.4cm}
+        \centerline{
+        \pgfplotstabletypeset[
+        col sep=comma, 
+        string type, 
+        ignore chars={"}, 
+        every even row/.style={before row={\rowcolor{lightgray}}},
+        every first column/.style={column type={l}},
+        every head row/.style={before row=\thickhline, after row=\thickhline},
+        every last row/.style={before row=\thickhline, after row=\thickhline}
+        ]
+        {diagnosis_summary.csv}}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Major depressive disorder (MDD) dataset}
+    \begin{itemize}
+        \item MDD symptoms: low self-esteem, loss of interest in activities, low energy, and suicidal thoughts
+        \item 40-50\% is heritable, 50-60\% environmental - identification of risk factors has been largely unsuccessful
+        \item Pharmacological treatments include TCAs, SSRI/NRIs, MAOIs and atypical antidepressants - less than 50\% of patients are treated
+        \item Last line of treatment - electroconvulsive therapy (ECT), wake therapy and ketamine
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{MDD dataset continued}
+    \begin{itemize}
+        \item Study design: treat patients with ECT, wake therapy, or ketamine
+        \item Collect RNA and DNA at baseline, after first treatment, after end of treatment, and 6 months later
+        \item Non-responders not usually sampled at last time point
+        \item Controls also collected at first time point
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Specific Aim 1: Gene Expression Biomarkers}
+    \begin{itemize}
+        \item Goal: Identification of gene expression biomarkers in blood
+        \item Biomarker candidates - genes whose expression levels are significantly associated with disease status, genotype, or continuous trait
+        \item Approaches: Single gene analysis, network analysis, predictive modeling
+        \item Workflow developed with FRDA dataset
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Aim 1a: Single Gene Analysis}
+        \begin{columns}
+            \begin{column}{0.35\textwidth}
+                \begin{block}{Figure 1}
+                    \footnotesize
+                    For categorical variables: linear modeling with limma, assess significance with EBAM approach from siggenes \\
+                    \vspace{\baselineskip}
+                    For continuous variables: correlation (preferably biweight mid-correlation)
+                \end{block}
+            \end{column}
+            \begin{column}{0.65\textwidth}
+                \begin{figure}
+                    \centering
+                    \includegraphics[width=1.0\textwidth]{../../FRDA project/baseline_lumi/volcano_pca.pdf}
+                \end{figure}
+            \end{column}
+        \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Enrichment Analysis}
+        \begin{columns}
+            \begin{column}{0.35\textwidth}
+                \begin{block}{Figure 2}
+                    \footnotesize
+                    Enrichr allows the user to submit a gene list to multiple databases (i.e. GO Biological Process, KEGG, Reactome)\\
+                    \vspace{\baselineskip}
+                    Enrichment scores calculated from hypergeometric overlap test
+                \end{block}
+            \end{column}
+            \begin{column}{0.65\textwidth}
+                \begin{figure}
+                    \centering
+                    \includegraphics[width=1.0\textwidth]{../../FRDA project/baseline_lumi/pca.enrichr.pdf}
+                \end{figure}
+            \end{column}
+        \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Correlation}
+        \begin{columns}
+            \begin{column}{0.35\textwidth}
+                \begin{block}{Figure 3}
+                    \footnotesize
+                    Gene expression can be correlated directly with continuous traits\\
+                    \vspace{\baselineskip}
+                    P-values calculated using Student’s asymptotic approach\\
+                    \vspace{\baselineskip}
+                    Biweight midcorrelation is more outlier resistant than Pearson’s correlation
+                \end{block}
+            \end{column}
+            \begin{column}{0.65\textwidth}
+                \begin{figure}
+                    \centering
+                    \includegraphics[width=0.5\textwidth]{../../FRDA project/WGCNA_GAA/TMOD1.pdf}
+                    \includegraphics[width=0.5\textwidth]{../../FRDA project/WGCNA_GAA/EIF1.pdf}
+                \end{figure}
+                \vspace{-0.6cm}
+                \begin{figure}
+                    \centering
+                    \includegraphics[width=0.5\textwidth]{../../FRDA project/WGCNA_GAA/DBNDD1.pdf}
+                    \includegraphics[width=0.5\textwidth]{../../FRDA project/WGCNA_GAA/DGKD.pdf}
+                \end{figure}
+            \end{column}
+        \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Overlap Analysis}
+        \begin{columns}
+            \begin{column}{0.35\textwidth}
+                \begin{block}{Figure 4}
+                    \footnotesize
+                    Other datasets available for both dementia and depression, including full transcriptomes\\
+                    \vspace{\baselineskip}
+                    Rank-rank hypergeometric overlap determines best possible overlap value\\
+                    \vspace{\baselineskip}
+                    Heatmaps used to visualize overlaps between different contrasts and datasets
+                \end{block}
+            \end{column}
+            \begin{column}{0.65\textwidth}
+                \begin{figure}
+                    \centering
+                    \includegraphics[width=1.0\textwidth]{../../FRDA project/overlap/overlap.heatmap.pdf}
+                \end{figure}
+            \end{column}
+        \end{columns}
+\end{frame}
+
+\begin{frame}{Alternative Approaches}
+    \begin{itemize}
+        \item Fully non-parametric permutation based DE analysis with Significance Analysis of Microarray (SAM) or EBAM
+        \item Assess whether log fold change difference is above a specific threshold - T-test RElative to A Threshold (TREAT)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Aim 1b: Network Analysis}
+    \begin{itemize}
+        \item Genes are often co-expressed - must have some covariance structure
+        \item Weighted Gene Co-expression Network Analysis (WGCNA) computes correlations between all genes and clusters into modules based on Manhattan distance in dissimilarity topological overlap matrix (TOM)
+        \item Eigengenes are calculated from first principal component of each module
+    \item Hub genes are biomarker candidates
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sample Network Dendrogram and Modules}
+        \begin{columns}
+            \begin{column}{0.35\textwidth}
+                \begin{block}{Figure 5}
+                    \footnotesize
+                    Dendrogram is visualization of clustering structure in dissimilarity TOM\\
+                    \vspace{\baselineskip}
+                    Colors represent module assignments based on dynamicTreeCut\\
+                    \vspace{\baselineskip}
+                    Modules with eigengenes with correlation > 0.8 were merged
+                \end{block}
+            \end{column}
+            \begin{column}{0.65\textwidth}
+                \begin{figure}
+                    \centering
+                    \includegraphics[width=1.0\textwidth]{../../FRDA project/WGCNA/module_eigengene_clustering.pdf}
+                \end{figure}
+            \end{column}
+        \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Significant Eigengenes}
+        \begin{columns}
+            \begin{column}{0.35\textwidth}
+                \footnotesize
+                \begin{block}{Figure 6}
+                    Eigengene significance assessed with linear model ANOVA for categorical variables, biweight midcorrelation for continuous\\
+                    \vspace{\baselineskip}
+                    Non-parametric testing - Kruskal-Wallis ANOVA for categorical variables, Spearman correlation for continuous
+                \end{block}
+            \end{column}
+            \begin{column}{0.65\textwidth}
+                \begin{figure}
+                    \centering
+                    \includegraphics[width=0.5\textwidth]{../../FRDA project/WGCNA/black.pdf}
+                    \includegraphics[width=0.5\textwidth]{../../FRDA project/WGCNA/brown.pdf}
+                \end{figure}
+            \end{column}
+        \end{columns}
+\end{frame}
+
+\begin{frame}{Aim 1b: Network Analysis}
+    \begin{itemize}
+        \item Gene modules will be submitted to Enrichr for GO and pathway enrichment analysis
+        \item Protein-protein interactions will be found with InWeb and BioGrid
+        \item Validation - consensus networks for sufficiently large datasets
+        \item Alternatives - nonlinear relationships can be studied with mutual information based networks (ARACNE, MRNET, MIC) or polynomial spline regression but very computationally intensive
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Aim 1c: Predictive Modeling}
+    \begin{itemize}
+        \item Build models to predict categorical variable (classification) or continuous variables (regression) - top ranked features are biomarkers
+        \item More popular models: discriminant analysis, support vector machines (SVM), random forest and tree-based methods, neural networks
+        \item Factors to consider: prediction performance, number of parameters, computational feasibility
+        \item Powerful and flexible framework provided by caret package
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Feature Selection}
+    \begin{itemize}
+        \item Transcriptome data usually has many more features than samples - prone to overfitting
+        \item Many features are redundant or noisy and must be removed
+        \item Metrics to rank features - differential expression, correlation, distance measures (i.e. Kolmogorov-Smirnoff)
+        \item Correlation Adjusted T-scores (CAT) and Correlation Adjusted coRrelation (CAR) - feature ranking that accounts for correlation between features
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Classification}
+        \begin{figure}
+            \centering
+            \includegraphics[width=1.0\textwidth]{../../FRDA project/classification/svm.rfe.accuracies.pdf}
+        \end{figure}
+        \begin{block}{Figure 7}
+            \footnotesize
+            SVM with linear kernel has performed well with FRDA data on subsets of CAT-ranked genes\\
+            \vspace{\baselineskip}
+            Model performance assessed with Cohen’s kappa adjusted with 0.632 method in 25 boostrapped samples
+        \end{block}
+        %\begin{columns}
+            %\begin{column}{0.35\textwidth}
+            %\end{column}
+            %\begin{column}{0.65\textwidth}
+            %\end{column}
+        %\end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Regression}
+        \begin{columns}
+            \begin{column}{0.35\textwidth}
+                \begin{block}{Figure 8}
+                    \footnotesize
+                    SVM with polynomial kernel has done well predicting age and GAA length in FRDA data on subsets of CAR-ranked genes\\
+                    \vspace{\baselineskip}
+                    Model performance assessed with RMSE and R2 adjusted with 0.632 method in 25 bootstrapped samples 
+                \end{block}
+            \end{column}
+            \begin{column}{0.65\textwidth}
+                \begin{figure}
+                    \centering
+                    \includegraphics[width=1.0\textwidth]{../../FRDA project/GAA_regression/svm.rmse.pdf}
+                \end{figure}
+                \vspace{-0.7cm}
+                \begin{figure}
+                    \centering
+                    \includegraphics[width=1.0\textwidth]{../../FRDA project/GAA_regression/svm.rsquared.pdf}
+                \end{figure}
+            \end{column}
+        \end{columns}
+\end{frame}
+
+\begin{frame}{Aim 1c: Predictive Modeling}
+    \begin{itemize}
+        \item Validation - test predictions on other data; for large datasets, build models and test them with my data
+        \item Alternative approaches - try other models using caret framework, use other feature ranking methods including some implemented by ClassifyR
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Specific Aim 2: Identify DNA methylation biomarkers in blood}
+    \begin{itemize}
+        \item DNA methylation is a marker of gene suppression - increased methylation leads to reduced expression
+        \item Data can usually be treated equivalently to expression data - beta-values are restricted to range of 0 to 1
+        \item Illumina Human 450k and  EPIC arrays have individual probes corresponding to genes, intergenic CpG islands and other areas
+        \item RnBeads package makes it easy to collapse data to gene bodies or promoters (1.5kb upstream to 0.5kb downstream of TSS)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Adaptations for DNA methylation}
+    \begin{itemize}
+        \item Work with preliminary datasets indicates that only minimal changes need to be made to adapt gene expression workflow for methylation
+        \item RnBeads collapses data Ensembl IDs - must be annotated with symbols and other information using biomaRt
+        \item Soft-thresholding for network analysis may need to be adjusted
+        \item Methylation data will also be submitted to methylation biological clock 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Specific Aim 3: Integration of gene expression and methylation data}
+    \begin{itemize}
+        \item Goal: Examine the relationship between gene methylation and expression, and determine if disease affects this relationship
+        \item Single gene analysis: correlate linear modeling coefficients, correlate expression and methylation of individual genes
+        \item Network analysis: consensus network between methylation and expression
+        \item Predictive modeling: train regression models from methylation data to predict gene expression
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Timeline}
+    \begin{itemize}
+        \item Next committee meeting - 8-12 months
+        \item Graduation - middle to end of 2018 - 6 years total for Ph.D. (the average completion time for NSIDP), 3 with Giovanni
+        \item Interested in both bioinformatics post-docs and industry positions - stay in California
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Acknowledgements}
+    \begin{itemize}
+        \item Margaret Chu
+        \item Committee members!
+        \item Coppola lab: Fuying Gao, Tom Crisman, Zhongan Yang, Deepika Dokuru, Victoria Van Berlo, Kevin Wojta, Doxa Chatzopoulou
+        \item Geschwind lab: Jill Haney, Vivek Swarup
+        \item Ophoff lab: Anil Ori
+        \item Eliza Congdon and Depression Grand Challenge
+        \item Children’s Hospital of Philadelphia - David Lynch, Charlie Isaacs
+        \item Friedreich’s Ataxia Research Alliance - Jen Farmer
+    \item UCSF Center for Memory and Aging
+    \end{itemize}
+\end{frame}
+
+
+\end{document}

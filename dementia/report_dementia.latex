@@ -2,24 +2,24 @@
 \usefonttheme{professionalfonts}
 \usepackage{fontspec}
 \setsansfont{Oxygen-Regular}
-%\usepackage{pgfplotstable, pgfplots, grffile}
-%\usepackage{booktabs, colortbl, array, graphicx}
+\usepackage{pgfplotstable, pgfplots, grffile}
+\usepackage{booktabs, colortbl, array, graphicx}
 %\usepackage{smartdiagram}
-%\pgfplotsset{compat=newest}
+\pgfplotsset{compat=newest}
 \setbeamertemplate{blocks}[rounded]
 \mode<presentation>
-%\newcolumntype{C}{>{\centering\arraybackslash}m{6em}}
-%\newcolumntype{D}{>{\centering\arraybackslash}m{8em}}
+\newcolumntype{C}{>{\centering\arraybackslash}m{6em}}
+\newcolumntype{D}{>{\centering\arraybackslash}m{8em}}
 
-%\makeatletter
-%\newcommand{\thickhline}{%
-    %\noalign {\ifnum 0=`}\fi \hrule height 1pt
-    %\futurelet \reserved@a \@xhline
-%}
-%\newcolumntype{E}{@{\vrule width 1pt\hspace{\tabcolsep}}}
-%\newcolumntype{F}{@{\hspace{\tabcolsep}\vrule width 1pt\hspace{\tabcolsep}}}
-%\newcolumntype{G}{@{\hspace{\tabcolsep}\vrule width 1pt}}
-%\makeatother
+\makeatletter
+\newcommand{\thickhline}{%
+    \noalign {\ifnum 0=`}\fi \hrule height 1pt
+    \futurelet \reserved@a \@xhline
+}
+\newcolumntype{E}{@{\vrule width 1pt\hspace{\tabcolsep}}}
+\newcolumntype{F}{@{\hspace{\tabcolsep}\vrule width 1pt\hspace{\tabcolsep}}}
+\newcolumntype{G}{@{\hspace{\tabcolsep}\vrule width 1pt}}
+\makeatother
 
 \title{Dementia Gene Expression Report}
 \author{Daniel Nachun}
@@ -31,19 +31,66 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Full Dataset}
-    1060 samples downloaded from "Nessie"\\
-    Some batches contain samples from other studies\\
-    Possibly missing 2012-024\\
-    Has arrays from Illumina HT v1-v4\\
+    \frametitle{Datasets}
+    \textbf{GIFT}
+    \begin{itemize}
+        \item 1769 patients\\
+        \item 1824 microarrays, 37 batches\\
+        \item Platform is Illumina HT12 v1-v4\\
+    \end{itemize}
     \vspace{\baselineskip}
-    1848 patients have at least 1 RNA sample in GIFTbase\\
-    Fuying is uploading remaining data\\
+    \textbf{Ringman (Fanny's project)}
+    \begin{itemize}
+        \item 42 samples, 3 batches\\
+        \item Only familial Alzheimer's
+    \end{itemize} 
 \end{frame}
 
 \begin{frame}
-    \frametitle{Fanny's Dataset}
-    42 samples, 3 batches\\
-    Batches were on "Nessie"
+    \frametitle{GIFT Sample Sizes}
+    \begin{block}{}
+    \renewcommand{\arraystretch}{1.3}
+    \fontsize{4}{5.5}\selectfont    
+    \setlength{\tabcolsep}{2pt}
+    \begin{center}
+        \centerline{
+        \pgfplotstabletypeset[
+        col sep=comma, 
+        string type, 
+        ignore chars={"}, 
+        every even row/.style={before row={\rowcolor{lightgray}}},
+        every first column/.style={column type=EcF},
+        display columns/6/.style={column type=cG},
+        every head row/.style={before row=\thickhline, after row=\thickhline},
+        every last row/.style={before row=\thickhline, after row=\thickhline}
+        ]
+        {../../Dementia Project/phenotypedata/diagnosis_summary.csv}}
+    \end{center}
+    \end{block}
 \end{frame}
+
+\begin{frame}
+    \frametitle{Sex Distribution}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.95\paperwidth]{../../Dementia Project/phenotypedata/sex_barplot.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Age Distribution}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.95\paperwidth]{../../Dementia Project/phenotypedata/age_boxplot.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Pathogenic Variants}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.87\paperheight]{../../Dementia Project/phenotypedata/mutations_barplot.pdf}}
+    \end{figure}
+\end{frame}
+
 \end{document}

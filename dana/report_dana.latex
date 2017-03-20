@@ -1,0 +1,449 @@
+\documentclass{beamer}
+\usefonttheme{professionalfonts}
+\usepackage{fontspec, smartdiagram}
+\setsansfont{Oxygen-Regular}
+\usepackage{grffile}
+\usepackage{graphicx}
+\setbeamertemplate{blocks}[rounded]
+\mode<presentation>
+
+\title{Dana Stroke Recovery Study}
+\author{Daniel Nachun (Coppola Lab)}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}
+    \frametitle{Summary}
+    56 samples\\
+    Age and Sex available for all samples\\
+    26 Female, 30 Male\\
+    Median Age: 69\\
+    \vspace{\baselineskip}
+    \textbf{Fugl Meyer Scores}\\
+    Available at admission and discharge for 43 of 56 patients\\
+    25 have an increase of less than 10 (Previously defined as 'recovered')\\
+    18 have an increase of more than 10 (Previously defined as 'not recovered')\\
+    \vspace{\baselineskip}
+    41 of those 43 have gene expression data, and 38 of 43 have methylation data
+\end{frame}
+
+\begin{frame}
+    \frametitle{Clinical Data}
+    The following medically relevant information is available for almost all patients: 
+    \vspace{\baselineskip}
+    \begin{itemize}
+    \item TIA (yes/no)
+    \item atrial fibrillation (yes/no)
+    \item coronary and peripheral artery disease (yes/no)
+    \item previous heart attack (yes/no)
+    \item hypertension (yes/no)
+    \item diabetes (yes/no)
+    \item high cholesterol (yes/no)
+    \item white blood cell count (continuous)
+    \item body mass index (continuous)
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Clinical Data}
+    Medications for the following conditions are also available for almost all patients:
+    \vspace{\baselineskip}
+    \begin{itemize}
+    \item cholesterol
+    \item hypertension
+    \item diabetes
+    \end{itemize}
+    \vspace{\baselineskip}
+    Name and dose of specific statins is available for almost all patients\\
+\end{frame}
+
+\begin{frame}
+    \frametitle{Baseline Analysis Workflow}
+    \begin{block}{}
+    \begin{center}
+        \centerline{
+            \smartdiagramset{font = \small, back arrow disabled=true, module minimum width = 4cm, text width = 3.75cm, module y sep = 1.6}
+            \smartdiagram[flow diagram:vertical]{VST intensity normalization, RSN inter-array normalization, Remove 1 outlier, Empirical Bayesian linear modeling}
+        }
+    \end{center}
+    \end{block}
+\end{frame}
+
+%\begin{frame}
+    %\frametitle{Data Quality}
+    %\begin{figure}
+        %\centerline{
+        %\includegraphics[width=0.95\paperwidth]{../../Burke/baseline/factor_8.csv}}
+    %\end{figure}
+%\end{frame}
+
+\begin{frame}
+    \frametitle{Sample Clustering (Outlier removed)}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.85\paperheight]{../../Burke/baseline/baseline_mds_status.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sample Clustering Heatmap (Outlier removed)}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.87\paperheight]{../../Burke/baseline/baseline_heatmap_1000.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Empirical Bayesian Linear Modeling}
+    Used to test difference in gene expression between groups\\
+    One linear model per gene: \(E(\mathbf{y}_g) = X\pmb{\alpha}_g\)\\
+    False discovery rate is optionally used for multiple comparisons correction\\
+    \vspace{\baselineskip}
+    We are interested in coefficents from contrast matrix: \(\pmb{\beta}_g = C^T\pmb(\alpha)_g\)
+    \begin{itemize}
+        \item Our contrast: Recovered - Unrecovered
+        \item Age, sex, hypertension, BMI, ethnicity, and RIN included as additional covariates
+        \item Small sample size means comparisons will have less statistical power
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Threshold Selection (Recovered vs. Unrecovered)}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../Burke/baseline/threshold_selection.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Recovered vs. Unrecovered Heatmap w/o FDR}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../Burke/baseline/anova_heatmap.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Top 30 Differentially Expressed Genes (Recovered vs. Unrecovered)}
+    \vspace{-0.7cm}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=\paperwidth]{../../Burke/baseline/significant_geneList_pLess005_time1.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA Analysis Workflow}
+    \begin{block}{}
+    \begin{center}
+        \centerline{
+            \smartdiagramset{font = \tiny, back arrow disabled=true, module minimum height = 0.4cm, module minimum width = 6cm, module y sep = 1.1, text width = 5.75cm}
+            \smartdiagram[flow diagram:vertical]{Calculate adjacency using Pearson's correlation, Convert adjacency to Topological Overlap Matrix, Cluster genes using average linked hierarchical clustering, Create modules using dynamic tree cutting, Calculate eigengene for each module, Correlate eigengenes with phenotypical traits}
+        }
+    \end{center}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA Cluster Dendrogram}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.95\paperwidth]{../../Burke/WGCNA/4-module_eigengene_clustering_min50.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA Module Cluster Dendrogram}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.95\paperwidth]{../../Burke/WGCNA/5-eigengenes.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA Module-Trait Heatmap}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../Burke/WGCNA/module-trait relationships.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Dark Green Eigengene-DeltaFM correlation}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../Burke/WGCNA/DeltaFM_darkgreen_eigengenes.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Dark Green Eigengene-FMAdmit correlation}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../Burke/WGCNA/FMAdmit_darkgreen_eigengenes.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Gene Ontology}
+    \vspace{0.1cm}
+    \centerline{GO Biological Process}
+    \vspace{-0.2cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../Burke/WGCNA/DarkGreen_GO_Biological.pdf}}
+    \end{figure}
+    \vspace{-0.4cm}
+    \centerline{GO Molecular Process}
+    \vspace{-0.1cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../Burke/WGCNA/DarkGreen_GO_Molecular.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Pathway Analysis}
+    \vspace{0.1cm}
+    \centerline{Reactome}
+    \vspace{-0.2cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../Burke/WGCNA/DarkGreen_Reactome.pdf}}
+    \end{figure}
+    \vspace{-0.4cm}
+    \centerline{Panther}
+    \vspace{-0.1cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../Burke/WGCNA/DarkGreen_Panther.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Protein-Protein Network}
+    \begin{figure}
+        \centering{
+        \includegraphics[height=0.85\paperheight]{../../Burke/WGCNA/darkgreen_protein.png}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Differential Promoter Methylation Workflow}
+    \begin{block}{}
+    \begin{center}
+        \centerline{
+            \smartdiagramset{font = \tiny, back arrow disabled=true, module minimum height = 0.4cm, module minimum width = 6cm, module y sep = 1.1, text width = 5.75cm}
+            \smartdiagram[flow diagram:vertical]{Probe filtering, Background Correction with noob, Inter-Array Normalization with BMIQ, Aggregate CpG sites by promoters, Empirical Bayesian Linear Modeling}
+        }
+    \end{center}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Probe Filtering Steps}
+    \begin{block}{}
+    \begin{center}
+        \centerline{
+            \smartdiagramset{font = \tiny, back arrow disabled=true, module minimum height = 0.4cm, module minimum width = 6cm, module y sep = 1.1, text width = 5.75cm}
+            \smartdiagram[flow diagram:vertical]{Remove probes outside CpG context, Remove SNP probes, Remove probes on sex chromosomes, Remove probes with detection score < 0.95, Remove probes with invalid \(\beta\)-values, Remove probes with standard deviation below 0.005}
+        }
+    \end{center}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{PCA of Promoter \(\beta\)-Values}
+    \begin{figure}
+        \centering{
+        \includegraphics[height=0.85\paperheight]{../../Burke/baseline_methylation/pca_allsites.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Heatmap of 1000 most variable \(\beta\)-Values}
+    \begin{figure}
+        \centering{
+        \includegraphics[height=0.85\paperheight]{../../Burke/baseline_methylation/promoters_beta_heatmap.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{P-value thresholds}
+    \begin{figure}
+        \centering{
+        \includegraphics[height=0.85\paperheight]{../../Burke/baseline_methylation/threshold_selection.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Heatmap of 1000 most differentially expressed \(\beta\)-values}
+    \begin{figure}
+        \centering{
+        \includegraphics[height=0.85\paperheight]{../../Burke/baseline_methylation/top1000_DMR.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{GO and Pathway Analysis}
+    \vspace{0.1cm}
+    \centerline{GO Biological Process}
+    \vspace{-0.2cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../Burke/baseline_methylation/GO_Biological_Process.pdf}}
+    \end{figure}
+    \vspace{-0.4cm}
+    \centerline{Reactome}
+    \vspace{-0.1cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../Burke/baseline_methylation/Reactome.pdf}}
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{WGCNA Promoter Methylation Analysis Workflow}
+    \begin{block}{}
+    \begin{center}
+        \centerline{
+            \smartdiagramset{font = \tiny, back arrow disabled=true, module minimum height = 0.4cm, module minimum width = 6cm, module y sep = 1.1, text width = 5.75cm}
+            \smartdiagram[flow diagram:vertical]{Remove effects of other covariates, Calculate adjacency of promoter methyation \(\beta\)-values using Pearson's correlation, Convert adjacency to Topological Overlap Matrix, Cluster genes using average linked hierarchical clustering, Create modules using dynamic tree cutting, Calculate eigenpromoter for each module, Correlate eigenpromoters with phenotypical traits}
+        }
+    \end{center}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA Cluster Dendrogram}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.95\paperwidth]{../../Burke/WGCNA_methylation/4-module_eigengene_clustering_min50.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA Module Cluster Dendrogram}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.95\paperwidth]{../../Burke/WGCNA_methylation/5-eigengenes.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA Module-Trait Heatmap}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../Burke/WGCNA_methylation/module-trait relationships.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Orange Eigenprmoter-DeltaFM correlation}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../Burke/WGCNA_methylation/DeltaFM_orange_eigengenes.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Orange Module GO Biological Process}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.8\paperwidth]{../../Burke/WGCNA_methylation/orange/GO_Biological_Process.PDF}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Orange Module Pathway Analysis}
+    \vspace{0.1cm}
+    \centerline{Reactome}
+    \vspace{-0.2cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../Burke/WGCNA_methylation/orange/Reactome.pdf}}
+    \end{figure}
+    \vspace{-0.4cm}
+    \centerline{WikiPathways}
+    \vspace{-0.1cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../Burke/WGCNA_methylation/orange/WikiPathways_2015.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Red Eigenpromoter-DeltaFM correlation}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../Burke/WGCNA_methylation/DeltaFM_red_eigengenes.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Red Module GO Biological Process}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.8\paperwidth]{../../Burke/WGCNA_methylation/red/GO_Biological_Process.PDF}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Red Module Pathway Analysis}
+    \vspace{0.1cm}
+    \centerline{KEGG}
+    \vspace{-0.2cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../Burke/WGCNA_methylation/red/KEGG.PDF}}
+    \end{figure}
+    \vspace{-0.4cm}
+    \centerline{BioCarta}
+    \vspace{-0.1cm}
+    \begin{figure}
+        \centering{
+        \includegraphics[width=0.6\paperwidth]{../../Burke/WGCNA_methylation/red/Biocarta.PDF}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Overlap of Gene Expression and Methylation}
+    16 genes in the top 1000 most differentially methylated promoters were also in the top 1000 most differentially expressed genes\\
+    \vspace{0.2cm}
+    2 of these genes could be of some relevance to stroke recovery: ROBO3 and CNTNAP2\\
+    \vspace{0.2cm}
+    Both genes were less methylated in recovered patients\\
+    \vspace{0.2cm}
+    Expression of ROBO3 was higher in recovered patients than unrecovered patients\\
+    \vspace{0.2cm}
+    Expression of CNTNAP2 was lower in recovered paitents than unrecovered patients
+\end{frame}
+
+\begin{frame}
+    \frametitle{Overlap of WGCNA Gene Expression and Methylation Modules}
+    The red methylation module, which was higly enriched for Wnt signaling, shares 62 genes with the pink expression module, which is enriched for similar terms\\
+    \vspace{0.2cm}
+    The orange methylation module, which was highly enriched for neuron growth and axon guidance, shares 275 genes with the turquoise expression module which is enriched for similar terms\\
+    \vspace{0.2cm}
+    Despite these associations, the correlations are opposite of that to be expected.  The methylation modules are negatively correlated with DeltaFM, which would imply increased expression\\
+    \vspace{0.2cm}
+    However, the gene expression modules (pink and turquoise) are also weakly negatively correlated with DeltaFM, which would imply reduced expression\\
+\end{frame}
+
+\begin{frame}
+    \frametitle{Hunter's Syndrome}
+    The top differentially expressed gene, IDS, is associated with Hunter's Syndrome\\
+    \vspace{0.2cm}
+    The orange WGCNA gene expression module also contains genes related to Hunter's Syndrome\\
+    \vspace{0.2cm}
+    The top differentially methylated promoters contain even more genes related to Hunter's Syndrome\\
+    \vspace{0.2cm}
+    There do not appear to be any connections between Hunter's Syndrome and stroke, so the biological significance is unclear\\
+\end{frame}
+\end{document}

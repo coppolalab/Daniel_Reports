@@ -1,0 +1,424 @@
+\documentclass{beamer}
+\usefonttheme{professionalfonts}
+\usepackage{fontspec}
+\setsansfont{Oxygen-Regular}
+\usepackage{pgfplotstable, pgfplots, grffile}
+\usepackage{booktabs, colortbl, array, graphicx}
+\usepackage{smartdiagram}
+\pgfplotsset{compat=newest}
+\setbeamertemplate{blocks}[rounded]
+\mode<presentation>
+\newcolumntype{C}{>{\centering\arraybackslash}m{6em}}
+\newcolumntype{D}{>{\centering\arraybackslash}m{8em}}
+
+\makeatletter
+\newcommand{\thickhline}{%
+    \noalign {\ifnum 0=`}\fi \hrule height 1pt
+    \futurelet \reserved@a \@xhline
+}
+\newcolumntype{E}{@{\vrule width 1pt\hspace{\tabcolsep}}}
+\newcolumntype{F}{@{\hspace{\tabcolsep}\vrule width 1pt\hspace{\tabcolsep}}}
+\newcolumntype{G}{@{\hspace{\tabcolsep}\vrule width 1pt}}
+\makeatother
+
+\title{FRDA Biomarker Study}
+\author{Daniel Nachun}
+
+\begin{document}
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}
+    \frametitle{Summary}
+    \textbf{Samples}\\
+    5 batches, 176 samples\\
+    Illumina Human HT-12 v4 Platform\\
+    \vspace{\baselineskip}
+    \textbf{Time Point 1}\\
+    56 samples: 32 Patients, 24 Controls\\
+    \vspace{\baselineskip}
+    \textbf{Time Point 2}\\
+    64 samples: 33 Patients, 31 Controls, 9 of which are replicates\\
+\end{frame}
+
+\begin{frame}
+    \frametitle{Baseline Analysis Workflow}
+    \begin{block}{}
+    \begin{center}
+        \centerline{
+            \smartdiagramset{font = \small, back arrow disabled=true, module minimum height = 0.8cm, module minimum width = 6cm, text width = 7.75cm, module y sep = 1.3}
+            \smartdiagram[flow diagram:vertical]{VST intensity normalization, RSN inter-array normalization, Drop low detection score and unannotated probes, Batch correction with ComBat, Remove outliers and replicates, Collapse by symbol with collapseRows}
+        }
+    \end{center}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Data Quality - TP1}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.95\paperwidth]{../../Depression Project/baseline/baseline1_vst.jpg}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Data Quality - TP2}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.95\paperwidth]{../../Depression Project/baseline/baseline2_vst.jpg}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sample Clustering - TP1}
+    \begin{figure}
+        \centerline{
+            \includegraphics[width=0.475\paperwidth]{../../Depression Project/baseline/baseline1_combat_mdsplot_batch.pdf}
+            \includegraphics[width=0.475\paperwidth]{../../Depression Project/baseline/baseline1_combat_mdsplot_group.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sample Clustering - TP2}
+    \begin{figure}
+        \centerline{
+            \includegraphics[width=0.475\paperwidth]{../../Depression Project/baseline/combat_mdsplot_batch.pdf}
+            \includegraphics[width=0.475\paperwidth]{../../Depression Project/baseline/combat_mdsplot_group.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{No Collinearity!}
+    \begin{figure}
+        \centerline{
+            \includegraphics[width=0.33\paperwidth]{../../Depression Project/baseline/baseline1_ethnicity_barplot.pdf}
+            \includegraphics[width=0.33\paperwidth]{../../Depression Project/baseline/baseline1_gender_barplot.pdf}
+            \includegraphics[width=0.33\paperwidth]{../../Depression Project/baseline/baseline1_batch_barplot.pdf}
+        }
+    \end{figure}
+    \vspace{-1cm}
+    \begin{figure}
+        \centerline{
+            \includegraphics[height=0.42\paperheight]{../../Depression Project/baseline/baseline1_age_boxplot.pdf}
+            \includegraphics[height=0.42\paperheight]{../../Depression Project/baseline/baseline1_rin_boxplot.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Few Outliers!}
+    \begin{figure}
+        \centerline{
+            \includegraphics[width=0.475\paperwidth]{../../Depression Project/baseline/baseline1_connectivity.pdf}
+            \includegraphics[width=0.475\paperwidth]{../../Depression Project/baseline/baseline2_connectivity.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Threshold Selection}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../Depression Project/baseline/threshold_selection.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{TP1 Enrichr}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.9\paperwidth]{../../Depression Project/baseline/baseline1.enrichr.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{TP2 Enrichr}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.9\paperwidth]{../../Depression Project/baseline/baseline2.enrichr.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Baseline Gene List Overlaps}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.9\paperheight]{../../Depression Project/baseline/baseline_genelists.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Baseline TP1 WGCNA}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.85\paperwidth]{../../Depression Project/WGCNA_baseline/gene_dendrogram_and_module_colors_min50.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Baseline TP1 WGCNA}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.9\paperheight]{../../Depression Project/WGCNA_baseline/module-trait relationships.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Baseline TP1 WGCNA Overlaps}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.9\paperheight]{../../Depression Project/WGCNA_baseline/baseline1_genelists.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Baseline TP1 WGCNA Overlaps (Reduced)}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.9\paperheight]{../../Depression Project/WGCNA_baseline/baseline1_genelists_reduce.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Baseline TP2 WGCNA}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.85\paperwidth]{../../Depression Project/WGCNA_baseline2/gene_dendrogram_and_module_colors_min50.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Baseline TP2 WGCNA}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.9\paperheight]{../../Depression Project/WGCNA_baseline2/module-trait relationships.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Baseline TP2 WGCNA Overlaps}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.95\paperwidth]{../../Depression Project/WGCNA_baseline2/baseline2_genelists.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Baseline TP2 WGCNA Overlaps (Reduced)}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.9\paperheight]{../../Depression Project/WGCNA_baseline2/baseline2_genelists_reduce.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Time Point Comparisons}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../Depression Project/treatment/threshold_selection.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Time Point Comparisons Overlaps}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../Depression Project/treatment/ect_genelists.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Time Point Comparison WGCNA}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.85\paperwidth]{../../Depression Project/WGCNA_treatment/gene_dendrogram_and_module_colors_min50.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Time Point Comparison WGCNA}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.9\paperheight]{../../Depression Project/WGCNA_treatment/module-trait relationships.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Time Point Comparison WGCNA Overlaps}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.95\paperheight]{../../Depression Project/WGCNA_treatment/treatment_genelists.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Time Point Comparisons (Responders only)}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../Depression Project/treatment/threshold_selection_responder.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Time Point Comparisons (Responders only) Overlaps}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../Depression Project/treatment/responder_genelists.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Time Point Comparisons (Responders only) WGCNA}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.85\paperwidth]{../../Depression Project/WGCNA_treatment_responder/gene_dendrogram_and_module_colors_min50.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Time Point Comparisons (Responders only) WGCNA}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.9\paperheight]{../../Depression Project/WGCNA_treatment_responder/module-trait relationships.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Time Point Comparisons (Responders only) WGCNA Overlaps}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.90\paperheight]{../../Depression Project/WGCNA_treatment_responder/responder_genelists.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Time Point Comparisons (Non-responders only)}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../Depression Project/treatment/threshold_selection_nonresponder.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Time Point Comparisons (Non-responders only) Overlaps}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../Depression Project/treatment/nonresponder_genelists.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Time Point Comparisons (Non-responders only) WGCNA}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.85\paperwidth]{../../Depression Project/WGCNA_treatment_nonresponder/gene_dendrogram_and_module_colors_min50.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Time Point Comparisons (Non-responders only) WGCNA}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.9\paperheight]{../../Depression Project/WGCNA_treatment_nonresponder/module-trait relationships.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Time Point Comparisons (Non-responders only) WGCNA Overlaps}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.90\paperheight]{../../Depression Project/WGCNA_treatment_nonresponder/nonresponder_genelists.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Responder vs Non-responders}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../Depression Project/response_treatment/threshold_selection_timeresponse.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Responder vs Non-responders Overlaps}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../Depression Project/response_treatment/timeresponse_genelists.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Responder vs Non-responders TP1 WGCNA}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.85\paperwidth]{../../Depression Project/WGCNA_response/gene_dendrogram_and_module_colors_min50.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Responder vs Non-responders TP1 WGCNA}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.9\paperheight]{../../Depression Project/WGCNA_response/module-trait relationships.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Responder vs Non-responders TP1 WGCNA Overlaps}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.90\paperheight]{../../Depression Project/WGCNA_response/response.TP1_genelists.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Responder vs Non-responders TP2 WGCNA}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.85\paperwidth]{../../Depression Project/WGCNA_response2/gene_dendrogram_and_module_colors_min50.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Responder vs Non-responders TP2 WGCNA}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.9\paperheight]{../../Depression Project/WGCNA_response2/module-trait relationships.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Responder vs Non-responders TP2 WGCNA Overlaps}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.90\paperheight]{../../Depression Project/WGCNA_response2/response.TP2_genelists.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Responder vs Non-responders TP3 WGCNA}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.85\paperwidth]{../../Depression Project/WGCNA_response3/gene_dendrogram_and_module_colors_min50.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Responder vs Non-responders TP3 WGCNA}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.9\paperheight]{../../Depression Project/WGCNA_response3/module-trait relationships.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Responder vs Non-responders TP3 WGCNA Overlaps}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.90\paperheight]{../../Depression Project/WGCNA_response3/response.TP3_genelists.pdf}}
+    \end{figure}
+\end{frame}
+\end{document}

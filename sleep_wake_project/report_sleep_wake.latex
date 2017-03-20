@@ -1,0 +1,363 @@
+\documentclass{beamer}
+\usefonttheme{professionalfonts}
+\usepackage{grffile}
+\usepackage{array, graphicx}
+\usepackage{smartdiagram}
+\setbeamertemplate{blocks}[rounded]
+\mode<presentation>
+\usetheme[numbering=fraction,progressbar=foot,block=fill]{metropolis}
+\setsansfont{Noto Sans}
+
+\title{Sleep Wake RNA-Seq Study}
+\subtitle{Collaboration with Nedergaard Lab}
+\author{Daniel Nachun}
+
+\begin{document}
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}[t]{Sample Summary}
+    \begin{itemize}
+        \item 5 experimental groups, 11 or 12 samples each
+        \item Sleep groups - normal sleep cycle
+            \begin{itemize}
+                \item Group 1 (n = 12) - sacrificed 3 hours after lights on (ZT3) 
+                \item Group 2 (n = 12) - sacrificed 9 hours after lights on (ZT9)
+            \end{itemize}
+        \item Wake groups - reverse light/dark cycle
+            \begin{itemize}
+                \item Group 1 (n = 12) - sacrificed 3 hours after lights on (ZT15)
+                \item Group 2 (n = 11) - sacrificed 9 hours after lights on (ZT21)
+            \end{itemize}
+        \item Sleep deprivation (n = 11) - kept awake from ZT3-ZT9 of normal sleep cycle
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Baseline Analysis Workflow}
+    \begin{center}
+        \centerline{
+            \smartdiagramset{font = \tiny, back arrow disabled=true, module minimum height = 0.3cm, module minimum width = 4cm, text width = 3.75cm, module y sep = 1.2}
+            \smartdiagram[flow diagram:vertical]{Align with STAR, QC with Picardtools, Read counts with HTSeq, Annotate with Ensembl, Transform with voom, Differential expression with limma}
+        }
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{MDS of samples}
+    \begin{figure}
+        \centering
+        \includegraphics[height=0.80\paperheight]{../../Sleep_Wake_Project/differential_expression/MDS.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Differentially Expressed Genes at FDR < 0.05}
+    \begin{figure}
+        \centering
+        \includegraphics[height=0.80\paperheight]{../../Sleep_Wake_Project/differential_expression/toptable_thresholds.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Volcano Plots (Contrasts w/ Sleep Deprivation)}
+    \centering
+    \vspace{-0.25cm}
+    \begin{figure}
+        \includegraphics[width=0.33\paperwidth]{../../Sleep_Wake_Project/differential_expression/volcano_Sleep_grp1_vs_Sleep_dep.pdf}
+        \includegraphics[width=0.33\paperwidth]{../../Sleep_Wake_Project/differential_expression/volcano_Sleep_grp2_vs_Sleep_dep.pdf}
+    \end{figure}
+    \vspace{-0.75cm}
+    \begin{figure}
+        \includegraphics[width=0.33\paperwidth]{../../Sleep_Wake_Project/differential_expression/volcano_Wake_grp1_vs_Sleep_dep.pdf}
+        \includegraphics[width=0.33\paperwidth]{../../Sleep_Wake_Project/differential_expression/volcano_Wake_grp2_vs_Sleep_dep.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Volcano Plots (Sleep vs. Wake Contrasts)}
+    \centering
+    \vspace{-0.25cm}
+    \begin{figure}
+        \includegraphics[width=0.33\paperwidth]{../../Sleep_Wake_Project/differential_expression/volcano_Wake_grp1_vs_Sleep_grp1.pdf}
+        \includegraphics[width=0.33\paperwidth]{../../Sleep_Wake_Project/differential_expression/volcano_Wake_grp2_vs_Sleep_grp1.pdf}
+    \end{figure}
+    \vspace{-0.75cm}
+    \begin{figure}
+        \includegraphics[width=0.33\paperwidth]{../../Sleep_Wake_Project/differential_expression/volcano_Wake_grp2_vs_Sleep_grp1.pdf}
+        \includegraphics[width=0.33\paperwidth]{../../Sleep_Wake_Project/differential_expression/volcano_Wake_grp2_vs_Sleep_grp2.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Volcano Plots (Wake vs. Wake and Sleep vs. Sleep Contrasts)}
+    \centering
+    \begin{figure}
+        \includegraphics[width=0.45\paperwidth]{../../Sleep_Wake_Project/differential_expression/volcano_Sleep_grp2_vs_Sleep_grp1.pdf}
+        \includegraphics[width=0.45\paperwidth]{../../Sleep_Wake_Project/differential_expression/volcano_Wake_grp2_vs_Wake_grp1.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Top 5 Most Differentially Expressed Genes (Sleep vs Sleep Deprived)}
+    \centering
+    \begin{figure}
+        \includegraphics[width=0.9\paperwidth]{../../Sleep_Wake_Project/differential_expression/top5.Sleep_grp1_vs_Sleep_dep.pdf}
+    \end{figure}
+    \vspace{-1cm}
+    \begin{figure}
+        \includegraphics[width=0.9\paperwidth]{../../Sleep_Wake_Project/differential_expression/top5.Sleep_grp2_vs_Sleep_dep.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Top 5 Most Differentially Expressed Genes (Wake vs Sleep Deprived)}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.9\paperwidth]{../../Sleep_Wake_Project/differential_expression/top5.Wake_grp1_vs_Sleep_dep.pdf}
+    \end{figure}
+    \vspace{-1cm}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.9\paperwidth]{../../Sleep_Wake_Project/differential_expression/top5.Wake_grp2_vs_Sleep_dep.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Top 5 Most Differentially Expressed Genes (Wake Group 1 vs Sleep)}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.9\paperwidth]{../../Sleep_Wake_Project/differential_expression/top5.Wake_grp1_vs_Sleep_grp1.pdf}
+    \end{figure}
+    \vspace{-1cm}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.9\paperwidth]{../../Sleep_Wake_Project/differential_expression/top5.Wake_grp1_vs_Sleep_grp2.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Top 5 Most Differentially Expressed Genes (Wake Group 2 vs Sleep)}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.9\paperwidth]{../../Sleep_Wake_Project/differential_expression/top5.Wake_grp2_vs_Sleep_grp1.pdf}
+    \end{figure}
+    \vspace{-1cm}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.9\paperwidth]{../../Sleep_Wake_Project/differential_expression/top5.Wake_grp2_vs_Sleep_grp2.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Top 5 Most Differentially Expressed Genes (Wake vs Wake and Sleep vs Sleep)}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.9\paperwidth]{../../Sleep_Wake_Project/differential_expression/top5.Sleep_grp2_vs_Sleep_grp1.pdf}
+    \end{figure}
+    \vspace{-1cm}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.9\paperwidth]{../../Sleep_Wake_Project/differential_expression/top5.Wake_grp2_vs_Wake_grp1.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Ontology and Pathway Enrichment (Sleep Dep. vs. Sleep ZT9)}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.8\paperwidth]{../../Sleep_Wake_Project/differential_expression/s2d.enrichr.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Ontology and Pathway Enrichment (Sleep Dep. vs. Wake ZT21)}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.8\paperwidth]{../../Sleep_Wake_Project/differential_expression/w2d.enrichr.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Ontology and Pathway Enrichment (Wake ZT21 vs. Sleep ZT9)}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.8\paperwidth]{../../Sleep_Wake_Project/differential_expression/w2s.enrichr.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA Analysis Workflow}
+    \begin{center}
+        \centerline{
+            \smartdiagramset{font = \tiny, back arrow disabled=true, module minimum height = 0.4cm, module minimum width = 6cm, module y sep = 1.1, text width = 5.75cm}
+            \smartdiagram[flow diagram:vertical]{Remove effects of other covariates, Calculate adjacency of gene expression values using biweight mid-correlation, Convert adjacency to Topological Overlap Matrix, Cluster genes using average linked hierarchical clustering, Create modules using dynamic tree cutting, Calculate eigengene for each module, Assess eigengene significance using Kruskal-Wallis test}
+        }
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA Cluster Dendrogram}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.80\paperwidth]{../../Sleep_Wake_Project/WGCNA/module_eigengene_clustering.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA Module Cluster Dendrogram}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.80\paperheight]{../../Sleep_Wake_Project/WGCNA/eigengenes.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA Module-Trait Heatmap}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.80\paperheight]{../../Sleep_Wake_Project/WGCNA/module_trait_relationships.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{WGCNA Eigengenes}
+    \begin{figure}
+        \centerline{
+        \includegraphics[height=0.85\paperheight]{../../Sleep_Wake_Project/WGCNA/eigengene_plots.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Module Hub Genes}
+    \vspace{-0.4cm}
+    \begin{columns}[T]
+        \setbeamerfont{block title}{size=\tiny}
+        \tiny
+        \begin{column}[t]{0.24\paperwidth}
+            \begin{block}{Blue}
+                Lrrn2\\
+                Apc2\\
+                Cbx6\\
+                Panx2\\
+                Rbfox3\\
+            \end{block}
+            \begin{block}{Grey60}
+                Penk\\
+                Drd1\\
+                Gng7\\
+                Rarb\\
+                Gnal\\
+            \end{block}
+            \begin{block}{Midnight Blue}
+                Tmem131\\
+                Whsc1l1\\
+                Pcnx\\
+                Madd\\
+                Tnrc6b\\
+            \end{block}
+            \begin{block}{Tan}
+                Kcnq2\\
+                Hdac4\\
+                Trim9\\
+                Fmnl1\\
+                Amer2\\
+            \end{block}
+        \end{column}
+        \begin{column}[t]{0.24\paperwidth}
+            \begin{block}{Brown}
+                Hspa4\\
+                Rpn1\\
+                Ggps1\\
+                Ensa\\
+                Api5\\
+            \end{block}
+            \begin{block}{Light Cyan}
+                Amotl1\\
+                Agt\\
+                Slitrk6\\
+                AW551984\\
+                Sparc\\
+            \end{block}
+            \begin{block}{Pink}
+                2900027M19Rik\\
+                5530401A14Rik\\
+                Gm45176\\
+                Gm44802\\
+                4930419G24Rik\\
+            \end{block}
+            \begin{block}{Turquoise}
+                Atp6v1e1\\
+                Vdac2\\
+                Ndufb9\\
+                Uqcrc2\\
+                Rps3\\
+            \end{block}
+        \end{column}
+        \begin{column}[t]{0.24\paperwidth}
+            \begin{block}{Cyan}
+                Slit2\\
+                Nyap2\\
+                Lrrc8b\\
+                Nav3\\
+                Tshz3\\
+            \end{block}
+            \begin{block}{Light Green}
+                Stxbp5l\\
+                Rfwd2\\
+                Dennd5b\\
+                Fam135b\\
+                Ndst3\\
+            \end{block}
+            \begin{block}{Purple}
+                P4ha1\\
+                Zmym1\\
+                Chordc1\\
+                Gfod1\\
+                Sbk1\\
+            \end{block}
+        \end{column}
+        \begin{column}[t]{0.24\paperwidth}
+            \begin{block}{Green}
+                Epm2a\\
+                1110004F10Rik\\
+                Tmem18\\
+                Fbxl4\\
+                Tcta\\
+            \end{block}
+            \begin{block}{Magenta}
+                Cirbp\\
+                Cln6\\
+                BC021891\\
+                Ilvbl\\
+                Nagk\\
+            \end{block}
+            \begin{block}{Purple}
+                Gm28928\\
+                Nrcam\\
+                Gm43317\\
+                2900064K03Rik\\
+                Gm42772\\
+            \end{block}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Ontology and Pathway Enrichment (Purple Module)}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.8\paperwidth]{../../Sleep_Wake_Project/WGCNA/purple.enrichr.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Ontology and Pathway Enrichment (Magenta Module)}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.8\paperwidth]{../../Sleep_Wake_Project/WGCNA/magenta.enrichr.pdf}
+    \end{figure}
+\end{frame}
+
+\end{document}

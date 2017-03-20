@@ -1,0 +1,147 @@
+\documentclass{beamer}
+\usefonttheme{professionalfonts}
+\usepackage{pgfplotstable, pgfplots, grffile, float}
+\usepackage{booktabs, colortbl, array, graphicx}
+\usepackage{smartdiagram}
+\pgfplotsset{compat=newest}
+\setbeamertemplate{blocks}[rounded]
+\mode<presentation>
+\usetheme[numbering=fraction,progressbar=foot,block=fill]{metropolis}
+\setsansfont{Noto Sans}
+
+\newcolumntype{C}{>{\centering\arraybackslash}m{6em}}
+\newcolumntype{D}{>{\centering\arraybackslash}m{8em}}
+
+\makeatletter
+\newcommand{\thickhline}{%
+    \noalign {\ifnum 0=`}\fi \hrule height 1pt
+    \futurelet \reserved@a \@xhline
+}
+\newcolumntype{E}{@{\vrule width 1pt\hspace{\tabcolsep}}}
+\newcolumntype{F}{@{\hspace{\tabcolsep}\vrule width 1pt\hspace{\tabcolsep}}}
+\newcolumntype{G}{@{\hspace{\tabcolsep}\vrule width 1pt}}
+\makeatother
+
+\title{HD Cell Model Methylation Study}
+\subtitle{Collaboration with Goldman Lab}
+\author{Daniel Nachun}
+
+\begin{document}
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sample Summary}
+    \begin{itemize}
+        \item Appears to be 22 total samples - only G19 lines were included
+        \item 4 groups: Uninduced (CD133+/SSEA-4+), CD140a- (Div 170), CD140a+ (Div 170), CD140a+ (Div 200)
+        \item 2 biological replicates per group
+        \item Small group sizes mean that statistical inference (i.e. p-values for significance testing) don't produce meaningful results - 3 samples group is absolute minimum for differential methylation
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Chronological vs. Predicted Biological Age}
+    \begin{figure}
+        \centering{
+        \includegraphics[height=0.80\paperheight]{../../Goldman/biological_clock.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Differential Promoter/Gene Methylation Workflow}
+    \begin{center}
+        \centerline{
+            \smartdiagramset{font = \tiny, back arrow disabled=true, module minimum height = 0.4cm, module minimum width = 6cm, module y sep = 1.1, text width = 5.75cm}
+            \smartdiagram[flow diagram:vertical]{Probe filtering, Background Correction with noob, Normalization with BMIQ, Aggregate CpG sites by promoters/genes, Empirical Bayesian Linear Modeling, Annotate with Ensembl}
+        }
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Probe Filtering Steps}
+    \begin{center}
+        \centerline{
+            \smartdiagramset{font = \tiny, back arrow disabled=true, module minimum height = 0.4cm, module minimum width = 6cm, module y sep = 1.1, text width = 5.75cm}
+            \smartdiagram[flow diagram:vertical]{Remove probes outside CpG context, Remove SNP probes, Remove probes on sex chromosomes, Remove probes with detection score < 0.95, Remove probes with invalid \(\beta\)-values, Remove probes with standard deviation below 0.005}
+        }
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{PCA of Promoter \(\beta\)-Values}
+    \begin{figure}
+        \centering{
+        \includegraphics[height=0.8\paperheight]{../../Goldman/promoters_celltype.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{PCA of Gene \(\beta\)-Values}
+    \begin{figure}
+        \centering{
+        \includegraphics[height=0.8\paperheight]{../../Goldman/genes_celltype.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{PCA of Site \(\beta\)-Values}
+    \begin{figure}
+        \centering{
+        \includegraphics[height=0.8\paperheight]{../../Goldman/allsites_celltype.pdf}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{CD140a+ Div 200 vs Div 170}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.45\paperwidth]{../../Goldman/promoters_CD140a+_Div_170_vs._CD140a+_Div_200.pdf}
+        \includegraphics[width=0.45\paperwidth]{../../Goldman/genes_CD140a+_Div_170_vs._CD140a+_Div_200.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{CD140a+ (Div 170) vs CD140a- (Div 170)}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.45\paperwidth]{../../Goldman/promoters_CD140a-_Div_170_vs._CD140a+_Div_170.pdf}
+        \includegraphics[width=0.45\paperwidth]{../../Goldman/genes_CD140a-_Div_170_vs._CD140a+_Div_170.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{CD140a+ (Div 200) vs CD140a- (Div 170)}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.45\paperwidth]{../../Goldman/promoters_CD140a-_Div_170_vs._CD140a+_Div_200.pdf}
+        \includegraphics[width=0.45\paperwidth]{../../Goldman/genes_CD140a-_Div_170_vs._CD140a+_Div_200.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{ES vs CD140a+ (Div 170)}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.45\paperwidth]{../../Goldman/promoters_CD133+SSEA-4+_Div_uninduced_vs._CD140a+_Div_170.pdf}
+        \includegraphics[width=0.45\paperwidth]{../../Goldman/genes_CD133+SSEA-4+_Div_uninduced_vs._CD140a+_Div_170.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{ES vs CD140a+ (Div 170)}
+    \begin{figure}
+        \centerline{
+        \includegraphics[width=0.45\paperwidth]{../../Goldman/promoters_CD133+SSEA-4+_Div_uninduced_vs._CD140a+_Div_200.pdf}
+        \includegraphics[width=0.45\paperwidth]{../../Goldman/genes_CD133+SSEA-4+_Div_uninduced_vs._CD140a+_Div_200.pdf}
+        }
+    \end{figure}
+\end{frame}
+
+\end{document}
+

@@ -1,0 +1,102 @@
+\documentclass{beamer}
+\usefonttheme{professionalfonts}
+\usepackage{grffile}
+\usepackage{array, graphicx}
+\usepackage{smartdiagram}
+\setbeamertemplate{blocks}[rounded]
+\mode<presentation>
+\usetheme[numbering=fraction,progressbar=foot,block=fill]{metropolis}
+\setsansfont{Noto Sans}
+
+\title{Sleep Wake RNA-Seq Study - Overlap Analysis}
+\subtitle{Collaboration with Nedergaard Lab}
+\author{Daniel Nachun}
+
+\begin{document}
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Mackiewicz 2007 (PMID 17698924; GSE6514)}
+    \begin{itemize}
+        \item 2 experimental conditions - sleep and sleep deprivation
+        \item 5 time points: 0, 3, 6, 9, and 12 hours
+        \item 2 brain regions - hypothalamus and cerebral cortex
+        \item 5 replicates per time point and condition - 20 samples in total
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Maret 2007 (PMID 18077435; GSE9441)}
+    \begin{itemize}
+        \item First of 3 datasets for this publication
+        \item 2 experimental conditions - sleep and sleep deprivation
+        \item 1 time points: 6 hours
+        \item 2 tissues - brain (region unspecified) and liver (as negative control)
+        \item 3 different mouse strains: AKR/J, C57BL/6J, DBA/2J
+        \item 3 replicates per strain and condition - 36 samples in total
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Maret 2007 (PMID 18077435; GSE9442)}
+    \begin{itemize}
+        \item Second of 3 datasets for this publication
+        \item 2 experimental conditions - sleep and sleep deprivation
+        \item 4 time points: ZT0, ZT6, ZT12, ZT18
+        \item 1 tissues - brain (region unspecified) 
+        \item 3 different mouse strains: AKR/J, C57BL/6J, DBA/2J
+        \item 3 replicates per strain and condition - 72 samples in total (!)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Maret 2007 (PMID 18077435; GSE9443)}
+    \begin{itemize}
+        \item Third of 3 datasets for this publication
+        \item 2 experimental conditions - sleep and sleep deprivation
+        \item 1 time points: 6 hours
+        \item 2 tissues - Homer1a-expressing cells, Homer1a-negative cells (control), and whole brain (control)
+        \item 6 replicates per condition in Homer1a-expression cells, 4 per condition for whole brain - 20 samples in total
+        \item Homer1a-negative cells only had 2 sleep-deprived and 1 control - too few to analyze
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Yang 2007 (PMID 18028544; GSE9471)}
+    \begin{itemize}
+        \item 4 time points: ZT3, ZT9, ZT15, ZT21
+        \item 1 brain region - prefrontal cortex
+        \item 3 replicates per time point - 12 samples in total
+        \item Only sought to characterize genes which change over time
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Bellesi 2013 (PMID 24005282; GSE48369)}
+    \begin{itemize}
+        \item 3 experimental conditions - sleep, wake, sleep deprived
+        \item 1 time point - 8 hrs
+        \item 1 brain region - frontal cortex 
+        \item 6 replicates per condition
+        \item Used CNP as oligodendrocyte-specific marker to capture RNA in those cells
+        \item Bound (oligodendrocyte) and unbound (non-specific) fractions for each sample - 36 samples in total
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Bellesi 2015 (PMID 26303010; GSE69079)}
+    \begin{itemize}
+        \item 3 experimental conditions - sleep, wake, sleep deprived
+        \item Time point was 6-7 hrs
+        \item 1 brain region - Forebrain (striatum and cortex)
+        \item 6 replicates per condition for bound fraction, 2 for unbound - 24 samples in total
+        \item Used ALDH1L1 as astrocyte-specific marker to capture RNA in those cells
+        \item Too few samples to analyze unbound fraction so it was dropped
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Gerstner 2016 (PMID 27801296; GSE78215)}
+    \begin{itemize}
+        \item 2 experimental conditions - sleep, sleep deprived + recovery
+        \item For SD, 6hrs + 0, 1 or 2 hrs recovery, 5hrs + 3 or 6 hrs recovery
+        \item 1 brain region - Cerebral cortex
+        \item 5-7 replicates per condition per time point - 65 samples in total
+    \end{itemize}
+\end{frame}
+
+\end{document}
